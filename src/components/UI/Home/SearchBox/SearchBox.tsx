@@ -14,22 +14,23 @@ const SearchBox = () => {
   const dateFormat = "YYYY-MM-DD";
   const date = dayjs(new Date()).format(dateFormat);
   const handleSubmit = (data: FieldValues) => {
-    let searchString = "?";
+    let searchString = "";
     for (const field in data) {
       if (data[field]) {
-        searchString.concat(`${field}:${data[field]}&`);
+        console.log(data[field]);
+        searchString += `${field}=${data[field]}&`;
       }
     }
     searchString = searchString.slice(0, -1);
 
-    router.push(`/trips?destination=${searchString}`);
+    router.push(`/trips?${searchString}`);
   };
   return (
     <div className="custom-container relative -top-20">
       <div className="text-center absolute -top-7 inset-x-0 z-10 rounded-t-3xl">
         <span
           className="text-3xl font-semibold
-         bg-white rounded-t-3xl text-[#4096FF] py-4 px-16 "
+         bg-white rounded-t-3xl text-[#4096FF] py-4 px-8 md:px-16 "
         >
           Search for Your Trip
         </span>
