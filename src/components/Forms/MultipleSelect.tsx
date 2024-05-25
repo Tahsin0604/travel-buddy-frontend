@@ -19,26 +19,29 @@ const MultipleSelect = ({
   options,
 }: TPHSelectProps) => {
   return (
-    <Controller
-      name={name}
-      render={({ field, fieldState: { error } }) => {
-        return (
-          <Form.Item label={label}>
-            <Select
-              mode={mode}
-              style={{ width: "100%" }}
-              {...field}
-              options={options}
-              defaultValue={field.value}
-              size="large"
-              disabled={disabled}
-              labelInValue
-            />
-            {error && <small style={{ color: "red" }}>{error.message}</small>}
-          </Form.Item>
-        );
-      }}
-    />
+    <>
+      {label && <label htmlFor={name}>{label} :</label>}
+      <Controller
+        name={name}
+        render={({ field, fieldState: { error } }) => {
+          return (
+            <Form.Item>
+              <Select
+                mode={mode}
+                style={{ width: "100%" }}
+                {...field}
+                options={options}
+                defaultValue={field.value}
+                size="large"
+                disabled={disabled}
+                placeholder="Select One"
+              />
+              {error && <small style={{ color: "red" }}>{error.message}</small>}
+            </Form.Item>
+          );
+        }}
+      />
+    </>
   );
 };
 

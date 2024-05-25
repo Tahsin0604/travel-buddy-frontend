@@ -16,15 +16,16 @@ const DatePickerField = ({ name, label, disabledDate }: TDatePickerProps) => {
 
   const disabledDateFunction = (current: dayjs.Dayjs) => {
     if (!disabledDate) return false;
-    return current.isAfter(dayjs(disabledDate, dateFormat), "day");
+    return current.isBefore(dayjs(disabledDate, dateFormat), "day");
   };
 
   return (
     <div style={{ marginBottom: "20px" }}>
+      {label && <label htmlFor={name}>{label} :</label>}
       <Controller
         name={name}
         render={({ field, fieldState: { error } }) => (
-          <Form.Item label={label}>
+          <Form.Item>
             <DatePicker
               {...field}
               format={dateFormat}

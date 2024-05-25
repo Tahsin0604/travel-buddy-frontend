@@ -11,22 +11,25 @@ type TPHSelectProps = {
 };
 const TextField = ({ label, name }: TPHSelectProps) => {
   return (
-    <Controller
-      name={name}
-      render={({ field, fieldState: { error } }) => {
-        return (
-          <Form.Item label={label}>
-            <TextArea
-              style={{ width: "100%" }}
-              {...field}
-              defaultValue={field.value}
-              size="large"
-            />
-            {error && <small style={{ color: "red" }}>{error.message}</small>}
-          </Form.Item>
-        );
-      }}
-    />
+    <>
+      {label && <label htmlFor={name}>{label} :</label>}
+      <Controller
+        name={name}
+        render={({ field, fieldState: { error } }) => {
+          return (
+            <Form.Item>
+              <TextArea
+                style={{ width: "100%" }}
+                {...field}
+                defaultValue={field.value}
+                size="large"
+              />
+              {error && <small style={{ color: "red" }}>{error.message}</small>}
+            </Form.Item>
+          );
+        }}
+      />
+    </>
   );
 };
 

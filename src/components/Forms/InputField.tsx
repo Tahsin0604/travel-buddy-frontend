@@ -1,6 +1,7 @@
 "use client";
 
 import { Form, Input } from "antd";
+import FormItemLabel from "antd/es/form/FormItemLabel";
 
 import { Controller } from "react-hook-form";
 
@@ -10,22 +11,25 @@ type TPHSelectProps = {
 };
 const InputField = ({ label, name }: TPHSelectProps) => {
   return (
-    <Controller
-      name={name}
-      render={({ field, fieldState: { error } }) => {
-        return (
-          <Form.Item label={label}>
-            <Input
-              style={{ width: "100%" }}
-              {...field}
-              defaultValue={field.value}
-              size="large"
-            />
-            {error && <small style={{ color: "red" }}>{error.message}</small>}
-          </Form.Item>
-        );
-      }}
-    />
+    <>
+      {label && <label htmlFor={name}>{label} :</label>}
+      <Controller
+        name={name}
+        render={({ field, fieldState: { error } }) => {
+          return (
+            <Form.Item>
+              <Input
+                style={{ width: "100%" }}
+                {...field}
+                defaultValue={field.value}
+                size="large"
+              />
+              {error && <small style={{ color: "red" }}>{error.message}</small>}
+            </Form.Item>
+          );
+        }}
+      />
+    </>
   );
 };
 
