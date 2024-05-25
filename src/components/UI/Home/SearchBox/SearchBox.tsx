@@ -27,15 +27,7 @@ const SearchBox = () => {
   };
   return (
     <div className="custom-container relative -top-20">
-      <div className="text-center absolute -top-7 inset-x-0 z-10 rounded-t-3xl">
-        <span
-          className="text-3xl font-semibold
-         bg-white rounded-t-3xl text-[#4096FF] py-4 px-8 md:px-16 "
-        >
-          Search for Your Trip
-        </span>
-      </div>
-      <div className="py-12 px-4  bg-white  rounded-3xl  drop-shadow">
+      <div className="py-12 px-6  bg-white  rounded-3xl  drop-shadow">
         <ReusableForm onSubmit={handleSubmit}>
           <Row gutter={[8, 8]} justify="space-around" align="middle">
             <Col xs={24} md={5}>
