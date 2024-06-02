@@ -1,10 +1,9 @@
 "use client";
 
 import { Form, Select } from "antd";
-import type { SelectProps } from "antd";
 import { Controller } from "react-hook-form";
 
-type TPHSelectProps = {
+type TSelectProps = {
   label: string;
   name: string;
   options: { value: string; label: string }[];
@@ -17,7 +16,7 @@ const MultipleSelect = ({
   disabled,
   mode,
   options,
-}: TPHSelectProps) => {
+}: TSelectProps) => {
   return (
     <>
       {label && <label htmlFor={name}>{label} :</label>}

@@ -15,7 +15,11 @@ const DatePickerField = ({ name, label, disabledDate }: TDatePickerProps) => {
   const dateFormat = "YYYY-MM-DD";
 
   const disabledDateFunction = (current: dayjs.Dayjs) => {
-    if (!disabledDate) return false;
+    if (!disabledDate)
+      return current.isAfter(
+        dayjs(dayjs(new Date()).format(dateFormat), dateFormat),
+        "day"
+      );
     return current.isBefore(dayjs(disabledDate, dateFormat), "day");
   };
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="relative h-[85vh] w-full">
+    <section className="relative h-[80vh] w-full">
       <video
         src="/hero.mp4"
         muted

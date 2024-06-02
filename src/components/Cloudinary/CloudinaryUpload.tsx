@@ -1,10 +1,14 @@
+// components/CloudinaryUpload.js
+import { Button } from "antd";
 import { CldUploadWidget } from "next-cloudinary";
 import { Dispatch } from "react";
+import { CloudUploadOutlined } from "@ant-design/icons";
 
 type TCloudinaryProps = {
   setResource: Dispatch<any>;
 };
-const CloudinarySingleUpload = ({ setResource }: TCloudinaryProps) => {
+
+const CloudinaryUpload = ({ setResource }: TCloudinaryProps) => {
   return (
     <CldUploadWidget
       options={{
@@ -12,20 +16,26 @@ const CloudinarySingleUpload = ({ setResource }: TCloudinaryProps) => {
         multiple: false,
       }}
       signatureEndpoint="/api/uploadToCloudinary"
-      onSuccess={(result, { widget }) => {
+      onSuccess={(result) => {
         setResource(result?.info);
-        widget.close();
       }}
     >
       {({ open }) => {
         function handleOnClick() {
-          setResource(undefined);
           open();
         }
-        return <button onClick={handleOnClick}>Upload an Image</button>;
+        return (
+          <Button
+            size="large"
+            onClick={handleOnClick}
+            icon={<CloudUploadOutlined />}
+          >
+            Add Image
+          </Button>
+        );
       }}
     </CldUploadWidget>
   );
 };
 
-export default CloudinarySingleUpload;
+export default CloudinaryUpload;

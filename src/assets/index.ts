@@ -1,9 +1,10 @@
 const assets = {
-  images: {},
-  svgs: {},
-  videos: {
-    hero: require("./hero.mp4"),
+  images: {
+    register: require("./register.jpg"),
+    login: require("./login.jpg"),
+    upload: require("./upload.jpg"),
   },
+  svgs: {},
 };
 
 export default assets;

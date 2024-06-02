@@ -45,7 +45,9 @@ const Footer = () => {
       <Divider />
       <div className="text-center">
         <p>
-          <small>Copyright 2024 © Owned by Trip Buddy.</small>
+          <small>
+            Copyright {new Date().getFullYear()} © Owned by Trip Buddy.
+          </small>
         </p>
       </div>
     </footer>

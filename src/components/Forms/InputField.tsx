@@ -1,7 +1,6 @@
 "use client";
 
 import { Form, Input } from "antd";
-import FormItemLabel from "antd/es/form/FormItemLabel";
 
 import { Controller } from "react-hook-form";
 
@@ -11,7 +10,7 @@ type TPHSelectProps = {
 };
 const InputField = ({ label, name }: TPHSelectProps) => {
   return (
-    <>
+    <div>
       {label && <label htmlFor={name}>{label} :</label>}
       <Controller
         name={name}
@@ -29,7 +28,7 @@ const InputField = ({ label, name }: TPHSelectProps) => {
           );
         }}
       />
-    </>
+    </div>
   );
 };
 

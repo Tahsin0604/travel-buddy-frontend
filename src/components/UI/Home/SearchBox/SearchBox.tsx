@@ -26,7 +26,7 @@ const SearchBox = () => {
     router.push(`/trips?${searchString}`);
   };
   return (
-    <div className="custom-container relative -top-20">
+    <div className="custom-container relative -top-32 md:-top-20">
       <div className="py-12 px-6  bg-white  rounded-3xl  drop-shadow">
         <ReusableForm onSubmit={handleSubmit}>
           <Row gutter={[8, 8]} justify="space-around" align="middle">

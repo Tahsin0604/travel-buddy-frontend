@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Providers from "@/lib/Providers/Providers";
+import { Toaster } from "sonner";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <AntdRegistry>{children}</AntdRegistry>
+          <AntdRegistry>
+            <>
+              <Toaster position="bottom-right" richColors />
+              {children}
+            </>
+          </AntdRegistry>
         </Providers>
       </body>
     </html>

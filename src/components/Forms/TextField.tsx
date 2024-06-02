@@ -1,15 +1,14 @@
 "use client";
 
 import { Form } from "antd";
+import { Controller } from "react-hook-form";
 import TextArea from "antd/es/input/TextArea";
 
-import { Controller } from "react-hook-form";
-
-type TPHSelectProps = {
+type TProps = {
   label: string;
   name: string;
 };
-const TextField = ({ label, name }: TPHSelectProps) => {
+const TextField = ({ label, name }: TProps) => {
   return (
     <>
       {label && <label htmlFor={name}>{label} :</label>}
