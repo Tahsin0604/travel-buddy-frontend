@@ -33,7 +33,7 @@ const AuthComponent = () => {
         </>
       ) : (
         <>
-          <Button>Login</Button>
+          <Button href="/login">Login</Button>
         </>
       )}
     </>
