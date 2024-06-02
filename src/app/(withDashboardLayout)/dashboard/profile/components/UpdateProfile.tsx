@@ -1,3 +1,4 @@
+"use client";
 import DatePickerField from "@/components/Forms/DatePickerField";
 import InputField from "@/components/Forms/InputField";
 import ReusableForm from "@/components/Forms/ReusableForm";
@@ -25,7 +26,7 @@ const updateProfile = z.object({
     bio: z.string().optional(),
   }),
 });
-const UpdateProfile = async ({ open, setOpen, profileData }: TProps) => {
+const UpdateProfile = ({ open, setOpen, profileData }: TProps) => {
   const router = useRouter();
   const [updateMYProfile, { isLoading: updateLoading }] =
     useUpdateMYProfileMutation();
