@@ -7,8 +7,8 @@ import {
   setToLocalStorage,
 } from "@/utils/localStorageUtils";
 
-export const storeUserInfo = (accessToken: string) => {
-  return setToLocalStorage(authKey, accessToken);
+export const storeUserInfo = async (accessToken: string) => {
+  return await setToLocalStorage(authKey, accessToken);
 };
 
 export const getUserInfo = () => {
