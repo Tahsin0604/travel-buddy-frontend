@@ -15,7 +15,7 @@ export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
 
   if (authToken) {
-    const decodedData: Record<string, any> = decodeToken(authToken);
+    const decodedData: any = decodeToken(authToken as string);
     return {
       ...decodedData,
       role: decodedData?.role,
