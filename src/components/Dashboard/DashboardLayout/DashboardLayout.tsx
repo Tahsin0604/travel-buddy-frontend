@@ -32,11 +32,13 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             boxShadow: "1px 2px 2px #778899",
           }}
         >
-          <div className="flex justify-end items-center gap-4">
-            <AuthButton />
-            <button onClick={() => setVisible(true)} className="md:hidden">
-              <MenuOutlined />
-            </button>
+          <div className="flex flex-col justify-end items-center">
+            <div className="flex justify-end items-center gap-4">
+              <AuthButton />
+              <button onClick={() => setVisible(true)} className="md:hidden">
+                <MenuOutlined />
+              </button>
+            </div>
           </div>
           <DrawerItems open={visible} setOpen={setVisible} />
         </Header>
