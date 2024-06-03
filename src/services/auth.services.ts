@@ -11,11 +11,11 @@ export const storeUserInfo = async (accessToken: string) => {
   return await setToLocalStorage(authKey, accessToken);
 };
 
-export const getUserInfo = async () => {
+export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
 
-  if (authToken !== undefined || authToken !== null || authToken !== "") {
-    const decodedData: any = decodeToken(authToken as string);
+  if (authToken) {
+    const decodedData: Record<string, any> = decodeToken(authToken);
     return {
       ...decodedData,
       role: decodedData?.role,
