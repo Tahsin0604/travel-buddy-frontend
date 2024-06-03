@@ -55,10 +55,17 @@ const RegisterPage = () => {
 
         if (loginRes?.data?.accessToken) {
           setError("");
-          storeUserInfo(loginRes?.data?.accessToken);
-          toast.success(res?.message);
+          toast.success(loginRes?.message);
+          await storeUserInfo(loginRes?.data?.accessToken);
 
-          router.push("/dashboard/profile");
+          if (loginRes.data?.needPasswordChange) {
+            console.log("need password");
+            router.push("/dashboard/change-password");
+          }
+          if (!loginRes.data?.needPasswordChange) {
+            console.log("profile");
+            router.push("/dashboard/profile");
+          }
         }
       } else {
         setError(res?.message);
@@ -84,8 +91,8 @@ const RegisterPage = () => {
           </p>
         </div>
       )}
-      <div className="flex justify-center items-center bg-slate-50 gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
-        <div className="w-1/2 h-[88vh] overflow-hidden drop-shadow-md rounded-lg hidden md:block">
+      <div className="grid grid-cols-12 justify-center items-center bg-slate-50 gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
+        <div className="col-span-6 h-full overflow-hidden drop-shadow-md rounded-lg hidden md:block">
           <Image
             src={assets.images.register}
             alt="register"
@@ -93,7 +100,7 @@ const RegisterPage = () => {
             quality={100}
           />
         </div>
-        <div className="w-full md:w-1/2 px-10 py-6 rounded-lg bg-white drop-shadow-md">
+        <div className="col-span-12 md:col-span-6 px-10 py-6 rounded-lg bg-white drop-shadow-md">
           <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
             Register Now !!
           </h1>

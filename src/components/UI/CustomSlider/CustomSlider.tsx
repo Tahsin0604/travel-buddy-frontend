@@ -1,17 +1,23 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import Image from "next/image";
+import SliderNavigation from "./SliderNavigation";
 
 export default function CustomSlider({ images }: { images: string[] }) {
   return (
     <>
       <Swiper
         navigation={true}
-        modules={[Navigation]}
-        className="w-full h-full"
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        className="w-full h-full relative group"
+        loop={true}
       >
         {images?.map((image, index) => (
           <SwiperSlide key={index} className="w-full h-full relative">
@@ -23,6 +29,7 @@ export default function CustomSlider({ images }: { images: string[] }) {
             />
           </SwiperSlide>
         ))}
+        <SliderNavigation></SliderNavigation>
       </Swiper>
     </>
   );

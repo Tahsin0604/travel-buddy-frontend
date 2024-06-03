@@ -4,6 +4,7 @@ import { useGetMYProfileQuery } from "@/redux/api/myProfile";
 import { useAppDispatch } from "@/redux/hook";
 import { tagTypes } from "@/redux/tag-type";
 import { logoutUser } from "@/services/actions/logoutUser";
+import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Tooltip } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,7 +30,11 @@ const AuthComponent = () => {
         <>
           <Link href="/dashboard/profile">
             <Tooltip title={`${userName}`} placement="bottom">
-              <Avatar src={userImage} />
+              {userImage ? (
+                <Avatar src={userImage} />
+              ) : (
+                <Avatar icon={<UserOutlined />} />
+              )}
             </Tooltip>
           </Link>
 

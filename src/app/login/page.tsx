@@ -29,7 +29,7 @@ const LoginPage = () => {
   const handleSubmit = async (data: FieldValues) => {
     try {
       const loginRes = await userLogin(data);
-      console.log(loginRes);
+
       if (loginRes?.data?.accessToken) {
         setError("");
         toast.success(loginRes?.message);
@@ -61,15 +61,9 @@ const LoginPage = () => {
             </p>
           </Link>
         </div>
-        {error && (
-          <div>
-            <p className="bg-red-500 py-[1px] px-8 md:px-16 lg:px-28 text-white text-center rounded mt-1">
-              {error}
-            </p>
-          </div>
-        )}
-        <div className="flex justify-center items-center gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
-          <div className="w-1/2 h-[51vh] overflow-hidden drop-shadow-md rounded-lg hidden md:block">
+
+        <div className="grid grid-cols-12 justify-center items-center gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
+          <div className="col-span-6 h-full overflow-hidden drop-shadow-md rounded-lg hidden md:block">
             <Image
               src={assets.images.login}
               alt="login"
@@ -77,10 +71,17 @@ const LoginPage = () => {
               quality={100}
             />
           </div>
-          <div className="w-full md:w-1/2 px-10 py-6 rounded-lg bg-white drop-shadow-md">
+          <div className="col-span-12 md:col-span-6 px-10 py-6 rounded-lg bg-white drop-shadow-md">
             <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
               Login Now !!
             </h1>
+            {error && (
+              <div className="mb-6">
+                <p className="bg-red-500 py-[1px] px-8 md:px-16 lg:px-28 text-white text-center rounded mt-1">
+                  {error}
+                </p>
+              </div>
+            )}
             <ReusableForm
               onSubmit={handleSubmit}
               resolver={zodResolver(loginUser)}
