@@ -4,6 +4,7 @@ import { useGetMYProfileQuery } from "@/redux/api/myProfile";
 import { useAppDispatch } from "@/redux/hook";
 import { tagTypes } from "@/redux/tag-type";
 import { logoutUser } from "@/services/actions/logoutUser";
+import { getUserInfo } from "@/services/auth.services";
 import { Avatar, Button, Tooltip } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ const AuthComponent = () => {
   const dispatch = useAppDispatch();
   const [userImage, setUserImage] = useState("");
   const [userName, setUserName] = useState("");
+  const user = getUserInfo();
   useEffect(() => {
     setUserImage(data?.profilePhoto);
     setUserName(data?.name);
@@ -25,13 +27,15 @@ const AuthComponent = () => {
   };
   return (
     <>
-      {data ? (
+      {user?.id ? (
         <>
-          <Link href="/dashboard/profile">
-            <Tooltip title={`${userName}`} placement="bottom">
-              <Avatar src={userImage} />
-            </Tooltip>
-          </Link>
+          {userImage && (
+            <Link href="/dashboard/profile">
+              <Tooltip title={`${userName}`} placement="bottom">
+                <Avatar src={userImage} />
+              </Tooltip>
+            </Link>
+          )}
 
           <Button danger onClick={() => handleLogOut()}>
             Logout
