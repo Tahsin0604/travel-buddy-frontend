@@ -13,8 +13,9 @@ export const storeUserInfo = async (accessToken: string) => {
 
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
-  if (authToken) {
-    const decodedData: any = decodeToken(authToken);
+  console.log(authToken);
+  if (authToken !== undefined || authToken !== null || authToken !== "") {
+    const decodedData: any = decodeToken(authToken as string);
     return {
       ...decodedData,
       role: decodedData?.role,

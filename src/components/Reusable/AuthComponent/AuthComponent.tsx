@@ -12,11 +12,12 @@ import React, { useEffect, useState } from "react";
 
 const AuthComponent = () => {
   const router = useRouter();
+  const user = getUserInfo();
   const { data } = useGetMYProfileQuery({});
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [userImage, setUserImage] = useState("");
   const [userName, setUserName] = useState("");
-  const user = getUserInfo();
+
   useEffect(() => {
     setUserImage(data?.profilePhoto);
     setUserName(data?.name);
