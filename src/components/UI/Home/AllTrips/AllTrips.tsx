@@ -1,11 +1,7 @@
 "use client";
 import { useGetAllTripsQuery } from "@/redux/api/tripsApi";
-import { Avatar, Badge, Skeleton } from "antd";
-import Link from "next/link";
-import CustomSlider from "../../CustomSlider/CustomSlider";
-import { MapPin } from "lucide-react";
-import { UserOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
+import { Skeleton } from "antd";
+
 import TripCard from "../../TripCard/TripCard";
 
 const AllTrips = () => {
@@ -28,8 +24,11 @@ const AllTrips = () => {
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">
         {data.map((trip: Record<string, any>) => (
-          <div className="col-span-12 md:col-span-6 lg:col-span-3 ">
-            <TripCard key={trip?.id} trip={trip} />
+          <div
+            key={trip?.id}
+            className="col-span-12 md:col-span-6 lg:col-span-3 "
+          >
+            <TripCard trip={trip} />
           </div>
         ))}
       </div>
