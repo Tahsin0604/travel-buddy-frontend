@@ -14,13 +14,9 @@ export const userLogin = async (data: any) => {
   );
 
   const userInfo = await res.json();
-  const passwordChangeRequired = userInfo.data.needPasswordChange;
 
   if (userInfo.data.accessToken) {
-    setAccessToken(userInfo.data.accessToken, {
-      redirect: "/dashboard",
-      passwordChangeRequired,
-    });
+    await setAccessToken(userInfo.data.accessToken);
   }
 
   return userInfo;

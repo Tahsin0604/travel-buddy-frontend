@@ -32,9 +32,17 @@ const LoginPage = () => {
       console.log(loginRes);
       if (loginRes?.data?.accessToken) {
         setError("");
-        storeUserInfo(loginRes?.data?.accessToken);
-        router.push("/dashboard/profile");
         toast.success(loginRes?.message);
+        await storeUserInfo(loginRes?.data?.accessToken);
+
+        if (loginRes.data?.needPasswordChange) {
+          console.log("need password");
+          router.push("/dashboard/change-password");
+        }
+        if (!loginRes.data?.needPasswordChange) {
+          console.log("profile");
+          router.push("/dashboard/profile");
+        }
       } else {
         setError(loginRes?.message);
       }

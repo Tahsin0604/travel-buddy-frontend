@@ -13,7 +13,7 @@ axiosInstance.defaults.timeout = 60000;
 axiosInstance.interceptors.request.use(
   function (config) {
     const accessToken = getFromLocalStorage(authKey);
-    console.log(accessToken);
+    console.log({ axios: accessToken });
     if (accessToken) {
       config.headers["Authorization"] = accessToken;
     }
@@ -36,14 +36,13 @@ axiosInstance.interceptors.response.use(
     return responseObject;
   },
   async function (error) {
-    console.log(error);
     const config = error.config;
     if (error?.response?.status === 500 && !config.sent) {
       config.sent = true;
       const response = await getNewAccessToken();
       const accessToken = response?.data?.accessToken;
       setAccessToken(accessToken);
-      storeUserInfo(accessToken);
+      await storeUserInfo(accessToken);
       config.headers["Authorization"] = accessToken;
       return axiosInstance(config);
     } else {

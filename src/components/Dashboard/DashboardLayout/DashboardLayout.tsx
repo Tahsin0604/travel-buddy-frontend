@@ -4,7 +4,11 @@ import { Layout, theme } from "antd";
 import Sidebar from "../Sidebar/Sidebar";
 import DrawerItems from "../DrawerItems/DrawerItems";
 import { MenuOutlined } from "@ant-design/icons";
-
+import dynamic from "next/dynamic";
+const AuthButton = dynamic(
+  () => import("../../Reusable/AuthComponent/AuthComponent"),
+  { ssr: false }
+);
 const { Header, Content, Footer } = Layout;
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
@@ -28,7 +32,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
             boxShadow: "1px 2px 2px #778899",
           }}
         >
-          <div className="flex justify-end">
+          <div className="flex justify-end items-center gap-4">
+            <AuthButton />
             <button onClick={() => setVisible(true)} className="md:hidden">
               <MenuOutlined />
             </button>
