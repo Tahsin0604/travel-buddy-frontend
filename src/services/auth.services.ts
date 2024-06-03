@@ -11,9 +11,9 @@ export const storeUserInfo = async (accessToken: string) => {
   return await setToLocalStorage(authKey, accessToken);
 };
 
-export const getUserInfo = () => {
+export const getUserInfo = async () => {
   const authToken = getFromLocalStorage(authKey);
-  console.log(authToken);
+
   if (authToken !== undefined || authToken !== null || authToken !== "") {
     const decodedData: any = decodeToken(authToken as string);
     return {
