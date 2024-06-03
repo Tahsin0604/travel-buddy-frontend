@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 
 const TripCard = ({ trip }: { trip: Record<string, any> }) => {
   return (
-    <div className="col-span-12 md:col-span-6 lg:col-span-3 rounded-md shadow ">
+    <div className="rounded-md shadow">
       <Badge.Ribbon
         text={`$ ${trip?.budget}`}
         color="cyan"
@@ -37,7 +37,7 @@ const TripCard = ({ trip }: { trip: Record<string, any> }) => {
               )}
             </div>
           </div>
-          <Link href={`/trips/${trip?.id}`} className="py-2 px-4 inline-block">
+          <Link href={`/trips/${trip?.id}`} className="py-2 px-4 block">
             <p className="text-slate-500">
               with{"  "}
               <Link
