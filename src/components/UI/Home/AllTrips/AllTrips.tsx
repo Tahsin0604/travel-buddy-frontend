@@ -27,7 +27,7 @@ const AllTrips = () => {
         Featured Trips
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">
-        {trips.map((trip: Record<string, any>) => (
+        {trips?.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
             className="col-span-12 md:col-span-6 lg:col-span-3 "

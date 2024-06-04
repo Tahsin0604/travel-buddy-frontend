@@ -31,7 +31,10 @@ const ProfilePage = ({
       </div>
     );
   }
-  const { trips, meta } = data;
+  console.log({ profile, data });
+  const trips = data?.trips as Record<string, any>[];
+  const meta = data?.meta as Record<string, any>;
+
   return (
     <div className="custom-container py-20">
       <Row gutter={[12, 12]}>
@@ -82,7 +85,7 @@ const ProfilePage = ({
           Trips
         </p>
         <div className="mt-16 grid grid-cols-12 gap-5">
-          {trips.map((trip: Record<string, any>) => (
+          {trips?.map((trip: Record<string, any>) => (
             <div
               key={trip?.id}
               className="col-span-12 md:col-span-6 lg:col-span-3 "

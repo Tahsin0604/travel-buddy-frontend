@@ -75,7 +75,7 @@ const TripsPage = ({
   } else {
     renderComponent = (
       <>
-        {trips.map((trip: Record<string, any>) => (
+        {trips?.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
             className="col-span-12 md:col-span-6 lg:col-span-4 "
