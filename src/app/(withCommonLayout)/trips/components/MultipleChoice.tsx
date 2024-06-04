@@ -8,11 +8,11 @@ type TProps = {
 };
 const MultipleChoice = ({ label, value, setValue, options }: TProps) => {
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    setValue(value);
   };
   return (
     <div>
-      <p>{label}</p>
+      <p className="text-slate-500 mb-1">{label}</p>
       <Select
         style={{ width: "100%" }}
         options={options}

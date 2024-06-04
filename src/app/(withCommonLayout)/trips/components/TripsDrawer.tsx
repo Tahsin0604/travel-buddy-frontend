@@ -1,3 +1,4 @@
+"use client";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 import { Button, Drawer } from "antd";
@@ -47,30 +48,36 @@ const TripsDrawer = ({
   return (
     <>
       <DrawerContainer title="Filter Trips" open={open} setOpen={setOpen}>
-        <SearchField
-          label="Destination"
-          value={destination as string}
-          setValue={setDestination}
-        />
-        <MultipleChoice
-          options={TripTypeConstant}
-          label="Trip Type"
-          value={tripType as string}
-          setValue={setTripType}
-        />
-        <DateChoice
-          label="Start Date"
-          value={startDate as string}
-          setDate={setStartDate}
-        />
-        <DateChoice
-          label="End Date"
-          value={endDate as string}
-          setDate={setEndDate}
-        />
-        <Button danger onClick={() => handleReset()}>
-          Reset Filter
-        </Button>
+        <div className="space-y-5">
+          <SearchField
+            label="Destination"
+            value={destination as string}
+            setValue={setDestination}
+          />
+          <MultipleChoice
+            options={TripTypeConstant}
+            label="Trip Type"
+            value={tripType as string}
+            setValue={setTripType}
+          />
+          <DateChoice
+            label="Start Date"
+            value={startDate as string}
+            setDate={setStartDate}
+          />
+          <DateChoice
+            label="End Date"
+            value={endDate as string}
+            setDate={setEndDate}
+          />
+          <Button
+            danger
+            onClick={() => handleReset()}
+            style={{ width: "100%" }}
+          >
+            Reset Filter
+          </Button>
+        </div>
       </DrawerContainer>
     </>
   );

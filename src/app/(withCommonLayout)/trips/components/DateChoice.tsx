@@ -21,7 +21,7 @@ const DateChoice = ({ label, value, setDate }: TProps) => {
 
   return (
     <div>
-      <p>{label}</p>
+      <p className="text-slate-500 mb-1">{label}</p>
       <DatePicker
         format={dateFormat}
         defaultValue={value ? dayjs(value) : null}

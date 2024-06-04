@@ -8,11 +8,11 @@ type TProps = {
 const SearchField = ({ label, value, setValue }: TProps) => {
   return (
     <div>
-      <p>{label}</p>
+      <p className="text-slate-500 mb-1">{label}</p>
       <Input.Search
         style={{ width: "100%" }}
         size="large"
-        placeholder="input search text"
+        placeholder="Search Destination"
         onChange={(e) => setValue(e.target.value)}
       />
     </div>

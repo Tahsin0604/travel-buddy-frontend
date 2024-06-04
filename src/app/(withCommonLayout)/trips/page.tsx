@@ -8,8 +8,10 @@ import DateChoice from "./components/DateChoice";
 import { useDebounced } from "@/redux/hook";
 import dayjs from "dayjs";
 import TripCard from "@/components/UI/TripCard/TripCard";
-import { Button, Divider, Skeleton } from "antd";
+import { Button, Divider } from "antd";
 import TripsDrawer from "./components/TripsDrawer";
+import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
+import TripCardSkeleton from "@/components/UI/TripCard/TripCardSkeleton";
 
 const TripsPage = ({
   searchParams,
@@ -61,10 +63,12 @@ const TripsPage = ({
   const meta = data?.meta as Record<string, any>;
   let renderComponent: ReactNode;
   if (isLoading) {
-    const renderComponent = (
+    renderComponent = (
       <>
-        {Array.from({ length: 8 }, (v, i) => i).map((item) => (
-          <Skeleton key={item} active className="col-span-3" />
+        {Array.from({ length: 12 }, (v, i) => i).map((item) => (
+          <div key={item} className="col-span-12 md:col-span-6 lg:col-span-4 ">
+            <TripCardSkeleton />
+          </div>
         ))}
       </>
     );
@@ -83,7 +87,7 @@ const TripsPage = ({
     );
   }
   return (
-    <div className="custom-container">
+    <div className="custom-container mb-4">
       <TripsDrawer
         open={open}
         setOpen={setOpen}
@@ -98,13 +102,15 @@ const TripsPage = ({
         setTripType={setTripType}
         setPage={setPage}
       />
-      <p className="text-6xl font-extrabold mb-4 text-center">Find Trips</p>
-      <p className="text-xl font-bold  text-center mt-16 mb-10">
+      <p className="text-6xl font-extrabold mt-10 mb-4 text-center">
+        Find Trips
+      </p>
+      <p className="text-xl font-bold  text-center  mb-8">
         Discover your next big adventure
       </p>
       <Divider />
-      <div className="flex gap-6  py-10">
-        <div className="w-1/4 space-y-5 hidden lg:block">
+      <div className="flex gap-6  py-6">
+        <div className="w-1/5 space-y-5 hidden lg:block">
           <SearchField
             label="Destination"
             value={destination as string}
@@ -127,11 +133,11 @@ const TripsPage = ({
             setDate={setEndDate}
           />
         </div>
-        <div>
-          <div className="w-full lg:w-3/4 flex justify-between items-centers">
+        <div className="w-full lg:w-4/5 space-y-5">
+          <div className=" flex justify-between items-centers">
             {trips && (
-              <p className="text-slate-700 font-bold text-lg">
-                {meta?.total} trips found
+              <p className="text-slate-700 font-bold text-xl">
+                <span className="text-sky-500">{meta?.total}</span> trips found
               </p>
             )}
             <div className="lg:hidden">
@@ -145,6 +151,16 @@ const TripsPage = ({
             </div>
           </div>
           <div className=" grid grid-cols-12 gap-4">{renderComponent}</div>
+          <div className="flex justify-center item-center pt-6">
+            {trips?.length > 0 && (
+              <PaginationComponent
+                total={meta?.total}
+                current={meta?.page}
+                limit={meta?.limit}
+                setPage={setPage}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
