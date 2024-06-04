@@ -1,6 +1,6 @@
 "use client";
 import baseApi from "@/redux/api/baseApi";
-import { useGetMYProfileQuery } from "@/redux/api/myProfile";
+import { useGetMYProfileQuery } from "@/redux/api/profile";
 import { useAppDispatch } from "@/redux/hook";
 import { tagTypes } from "@/redux/tag-type";
 import { logoutUser } from "@/services/actions/logoutUser";

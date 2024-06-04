@@ -3,6 +3,15 @@ import baseApi from "./baseApi";
 
 export const profileAPi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    getUserProfile: build.query({
+      query: (id) => {
+        return {
+          url: `/profile/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: [tagTypes.user],
+    }),
     getMYProfile: build.query({
       query: () => {
         return {
@@ -25,4 +34,8 @@ export const profileAPi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetMYProfileQuery, useUpdateMYProfileMutation } = profileAPi;
+export const {
+  useGetUserProfileQuery,
+  useGetMYProfileQuery,
+  useUpdateMYProfileMutation,
+} = profileAPi;

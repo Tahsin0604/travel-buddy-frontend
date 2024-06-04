@@ -5,7 +5,7 @@ import ReusableForm from "@/components/Forms/ReusableForm";
 import TextField from "@/components/Forms/TextField";
 import DrawerContainer from "@/components/Reusable/DrawerContainer/DrawerContainer";
 import { authKey } from "@/constants/authKey";
-import { useUpdateMYProfileMutation } from "@/redux/api/myProfile";
+import { useUpdateMYProfileMutation } from "@/redux/api/profile";
 import deleteCookies from "@/services/actions/deleteCookies";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";

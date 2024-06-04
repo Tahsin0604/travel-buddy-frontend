@@ -4,19 +4,20 @@ import Loading from "@/components/UI/Loading";
 import {
   useGetMYProfileQuery,
   useUpdateMYProfileMutation,
-} from "@/redux/api/myProfile";
+} from "@/redux/api/profile";
 import { Button, Col, Row } from "antd";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import UpdateProfile from "./components/UpdateProfile";
 import CloudinaryUpload from "@/components/Cloudinary/CloudinaryUpload";
+import dayjs from "dayjs";
 
 const ProfilePage = () => {
   const [resource, setResource] = useState<any>("");
   const [imageSrc, setImageSrc] = useState(null);
   const [openDrawer, setOpenDrawer] = useState(false);
   const { data: profile, isLoading } = useGetMYProfileQuery({});
-  console.log(profile);
+
   const [updateMYProfile, { isLoading: updateLoading }] =
     useUpdateMYProfileMutation();
   useEffect(() => {
@@ -92,27 +93,29 @@ const ProfilePage = () => {
         </Col>
         <Col xs={24} md={14}>
           <div className="space-y-5">
-            <p className="text-slate-800 font-extrabold text-xl font-mono">
+            <p className="text-slate-700 font-semibold text-lg">
               Name :{" "}
-              <span className="text-slate-600 font-semibold font-sans">
+              <span className="text-slate-800 font-semibold text-lg">
                 {profile?.name}
               </span>
             </p>
-            <p className="text-slate-800 font-extrabold text-xl font-mono">
+            <p className="text-slate-700 font-semibold text-lg">
               Email :{" "}
-              <span className="text-slate-600 font-semibold font-sans">
+              <span className="text-slate-800 font-semibold text-lg">
                 {profile?.email}
               </span>
             </p>
-            <p className="text-slate-800 font-extrabold text-xl font-mono">
+            <p className="text-slate-700 font-semibold text-lg">
               Date of Birth :{" "}
-              <span className="text-slate-600 font-semibold font-sans">
-                {profile?.dateOfBirth}
+              <span className="text-slate-800 font-semibold text-lg">
+                {dayjs(profile?.dateOfBirth, "YYYY-MM-DD")
+                  .format("DD MMM YY")
+                  .toUpperCase()}
               </span>
             </p>
-            <p className="text-slate-800 font-extrabold text-xl font-mono">
+            <p className="text-slate-700 font-semibold text-lg">
               Bio :{" "}
-              <span className="text-slate-600 font-semibold font-sans">
+              <span className="text-slate-800 font-semibold text-lg">
                 {profile?.bio ?? ""}
               </span>
             </p>
