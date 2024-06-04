@@ -2,6 +2,7 @@
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import Loading from "@/components/UI/Loading";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
+import { isLoggedIn } from "@/services/auth.services";
 import { CalendarFilled, CalendarOutlined } from "@ant-design/icons";
 import { Button, Col, Row } from "antd";
 import dayjs from "dayjs";
@@ -15,6 +16,7 @@ const TripDetailsPage = ({
 }: {
   params: { tripId: string };
 }) => {
+  const isLoggedIn = isLoggedIn();
   const { data: trip, isLoading: tripDetailsLoading } =
     useGetTripDetailsQuery(tripId);
   if (tripDetailsLoading) {
@@ -24,7 +26,6 @@ const TripDetailsPage = ({
       </div>
     );
   }
-
   const stepsData: {
     title: string;
     description: string;

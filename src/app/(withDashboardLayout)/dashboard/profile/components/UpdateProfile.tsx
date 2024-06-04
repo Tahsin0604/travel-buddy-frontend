@@ -37,10 +37,19 @@ const UpdateProfile = ({ open, setOpen, profileData }: TProps) => {
   const handleSubmit = async (data: FieldValues) => {
     try {
       const res: Record<string, any> = await updateMYProfile(data);
+      console.log(res);
       if (res?.data?.id) {
         setOpen(false);
         setError("");
         toast.success("Profile updated successfully!!");
+        if (res?.data?.email) {
+          localStorage.removeItem(authKey);
+          await deleteCookies([authKey, "refreshToken"]);
+          toast.warning("Log in now!", {
+            description: "you just changed email or user name",
+          });
+          router.push("/login");
+        }
       } else {
         setError(res?.error?.message);
       }
