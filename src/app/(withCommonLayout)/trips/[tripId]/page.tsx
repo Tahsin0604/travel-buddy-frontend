@@ -24,7 +24,7 @@ const TripDetailsPage = ({
       </div>
     );
   }
-  console.log(trip, trip?.user?.profile?.profilePhoto);
+
   const stepsData: {
     title: string;
     description: string;

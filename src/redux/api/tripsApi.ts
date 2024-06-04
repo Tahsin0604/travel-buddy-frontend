@@ -11,6 +11,12 @@ export const tripsAPi = baseApi.injectEndpoints({
           params: args,
         };
       },
+      transformResponse: (data, meta) => {
+        return {
+          trips: data,
+          meta: meta,
+        };
+      },
       providesTags: [tagTypes.trips],
     }),
     getAllMyTrips: build.query({

@@ -16,7 +16,7 @@ const TripCard = ({ trip }: { trip: Record<string, any> }) => {
       >
         <div className="overflow-hidden">
           <div className="relative ">
-            <div className="h-56 w-full">
+            <div className="h-56 w-full rounded-t-md overflow-hidden">
               <CustomSlider images={trip?.images} />
             </div>
             <div className="absolute top-2 left-2 z-10">

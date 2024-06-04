@@ -5,7 +5,7 @@ import { Skeleton } from "antd";
 import TripCard from "../../TripCard/TripCard";
 
 const AllTrips = () => {
-  const { data, isLoading } = useGetAllTripsQuery({ limit: 8, page: 0 });
+  const { data, isLoading } = useGetAllTripsQuery({ limit: 8, page: 1 });
 
   if (isLoading) {
     return (
@@ -16,6 +16,7 @@ const AllTrips = () => {
       </div>
     );
   }
+  const trips = data?.trips as Record<string, any>[];
 
   return (
     <div className="custom-container mb-16">
@@ -23,7 +24,7 @@ const AllTrips = () => {
         Featured Trips
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">
-        {data.map((trip: Record<string, any>) => (
+        {trips.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
             className="col-span-12 md:col-span-6 lg:col-span-3 "
