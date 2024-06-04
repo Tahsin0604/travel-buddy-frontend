@@ -103,7 +103,7 @@ const TripsPage = ({
         Discover your next big adventure
       </p>
       <Divider />
-      <div className="flex gap-4  py-10">
+      <div className="flex gap-6  py-10">
         <div className="w-1/4 space-y-5 hidden lg:block">
           <SearchField
             label="Destination"
@@ -128,7 +128,7 @@ const TripsPage = ({
           />
         </div>
         <div>
-          <div className="flex justify-between items-centers">
+          <div className="w-full lg:w-3/4 flex justify-between items-centers">
             {trips && (
               <p className="text-slate-700 font-bold text-lg">
                 {meta?.total} trips found
@@ -144,9 +144,7 @@ const TripsPage = ({
               </Button>
             </div>
           </div>
-          <div className="w-full lg:w-3/4 grid grid-cols-12 gap-4">
-            {renderComponent}
-          </div>
+          <div className=" grid grid-cols-12 gap-4">{renderComponent}</div>
         </div>
       </div>
     </div>
