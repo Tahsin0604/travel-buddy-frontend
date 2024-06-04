@@ -104,7 +104,13 @@ const RegisterPage = () => {
           <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
             Register Now !!
           </h1>
-
+          {error && (
+            <div>
+              <p className="bg-red-500 py-2 text-white text-center rounded mt-1">
+                {error}
+              </p>
+            </div>
+          )}
           <ReusableForm
             onSubmit={handleSubmit}
             resolver={zodResolver(createUser)}

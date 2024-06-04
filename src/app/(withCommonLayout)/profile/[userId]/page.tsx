@@ -31,7 +31,7 @@ const ProfilePage = ({
       </div>
     );
   }
-  console.log({ profile, data });
+
   const trips = data?.trips as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;
 

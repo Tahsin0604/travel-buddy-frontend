@@ -101,7 +101,7 @@ const CreateTripsPage = () => {
 
       values.itinerary = itinerary;
       try {
-        const res = await createTrip(values);
+        const res: Record<string, any> = await createTrip(values);
         console.log(res);
         if (res?.data?.id) {
           setItinerary([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
@@ -110,7 +110,7 @@ const CreateTripsPage = () => {
           toast.success("Trips added successfully");
           router.push(`/trips/${res?.data?.id}`);
         } else {
-          // setError(res?.message);
+          setError(res?.error?.message);
         }
       } catch (err) {
         console.log(err);
@@ -123,6 +123,14 @@ const CreateTripsPage = () => {
       <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
         Write New Post !!
       </h1>
+
+      {error && (
+        <div>
+          <p className="bg-red-500 py-3 text-white text-center rounded mt-1">
+            {error}
+          </p>
+        </div>
+      )}
       {images.length > 0 && (
         <div className="w-full h-56  lg:h-96">
           <CustomSlider images={images} />

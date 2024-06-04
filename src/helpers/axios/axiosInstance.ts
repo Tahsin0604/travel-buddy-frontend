@@ -13,7 +13,6 @@ axiosInstance.defaults.timeout = 60000;
 axiosInstance.interceptors.request.use(
   function (config) {
     const accessToken = getFromLocalStorage(authKey);
-    console.log({ axios: accessToken });
     if (accessToken) {
       config.headers["Authorization"] = accessToken;
     }
@@ -28,7 +27,6 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   //@ts-ignore
   function (response) {
-    console.log(response);
     const responseObject: TResponseSuccess = {
       data: response?.data?.data,
       meta: response?.data?.meta,
@@ -37,7 +35,8 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const config = error.config;
-    if (error?.response?.status === 500 && !config.sent) {
+    if (error?.response?.status === 401 && !config.sent) {
+      console.log(error);
       config.sent = true;
       const response = await getNewAccessToken();
       const accessToken = response?.data?.accessToken;
@@ -51,7 +50,8 @@ axiosInstance.interceptors.response.use(
         message: error?.response?.data?.message || "Something went wrong",
         errorMessages: error?.response?.data?.message,
       };
-      return responseObject;
+
+      return { error: responseObject };
     }
   }
 );

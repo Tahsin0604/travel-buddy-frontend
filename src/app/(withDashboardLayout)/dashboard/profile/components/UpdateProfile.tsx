@@ -10,6 +10,7 @@ import deleteCookies from "@/services/actions/deleteCookies";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -19,32 +20,29 @@ type TProps = {
   profileData: Record<string, any>;
 };
 const updateProfile = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  profile: z.object({
-    dateOfBirth: z.string(),
-    bio: z.string().optional(),
-  }),
+  name: z.string().optional(),
+  email: z.string().email().optional(),
+  profile: z
+    .object({
+      dateOfBirth: z.string().optional(),
+      bio: z.string().optional(),
+    })
+    .optional(),
 });
 const UpdateProfile = ({ open, setOpen, profileData }: TProps) => {
   const router = useRouter();
+  const [error, setError] = useState("");
   const [updateMYProfile, { isLoading: updateLoading }] =
     useUpdateMYProfileMutation();
   const handleSubmit = async (data: FieldValues) => {
     try {
-      const res = await updateMYProfile(data);
+      const res: Record<string, any> = await updateMYProfile(data);
       if (res?.data?.id) {
         setOpen(false);
+        setError("");
         toast.success("Profile updated successfully!!");
-        if (data.name || data.email) {
-          localStorage.removeItem(authKey);
-          deleteCookies([authKey, "refreshToken"]);
-          toast.warning("Login again!!", {
-            description:
-              "You have changed your email address or name. So please login now.",
-          });
-          router.push("/login");
-        }
+      } else {
+        setError(res?.error?.message);
       }
     } catch (err: any) {
       toast.error(err.message);
@@ -52,6 +50,13 @@ const UpdateProfile = ({ open, setOpen, profileData }: TProps) => {
   };
   return (
     <DrawerContainer open={open} setOpen={setOpen} title="Update Profile">
+      {error && (
+        <div>
+          <p className="bg-red-500 py-2 text-white text-center rounded mt-1">
+            {error}
+          </p>
+        </div>
+      )}
       <ReusableForm
         onSubmit={handleSubmit}
         resolver={zodResolver(updateProfile)}
