@@ -1,8 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
 
-const deleteCookies = async (keys: string[]) => {
-  await keys.forEach((key) => {
+const deleteCookies = (keys: string[]) => {
+  keys.forEach((key) => {
     cookies().delete(key);
   });
 };
