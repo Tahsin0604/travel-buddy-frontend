@@ -8,7 +8,7 @@ const authRoutes = ["/login", "/register"];
 const commonPrivateRoutes = [
   "/dashboard/profile",
   "/dashboard/change-password",
-  /^\/trips\/request/,
+  /^\/trips\/request\/[^\/]+$/,
 ];
 const roleBasedPrivateRoutes = {
   USER: [/^\/dashboard\/user/],
@@ -28,7 +28,11 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  if (accessToken && commonPrivateRoutes.includes(pathname)) {
+  const commonPrivateRouteMatched = commonPrivateRoutes.some((route) =>
+    typeof route === "string" ? route === pathname : route.test(pathname)
+  );
+
+  if (accessToken && commonPrivateRouteMatched) {
     return NextResponse.next();
   }
   let decodedData = null;
