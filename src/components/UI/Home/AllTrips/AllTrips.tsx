@@ -3,18 +3,15 @@ import { useGetAllTripsQuery } from "@/redux/api/tripsApi";
 import { Skeleton } from "antd";
 
 import TripCard from "../../TripCard/TripCard";
-import TripCardSkeleton from "../../TripCard/TripCardSkeleton";
 
 const AllTrips = () => {
-  const { data, isLoading } = useGetAllTripsQuery({ limit: 8, page: 1 });
+  const { data, isLoading } = useGetAllTripsQuery({ limit: 8, page: 0 });
 
   if (isLoading) {
     return (
       <div className="custom-container  grid grid-cols-12">
         {Array.from({ length: 8 }, (v, i) => i).map((item) => (
-          <div key={item} className="col-span-12 md:col-span-6 lg:col-span-3 ">
-            <TripCardSkeleton />
-          </div>
+          <Skeleton key={item} active className="col-span-3" />
         ))}
       </div>
     );
@@ -27,10 +24,10 @@ const AllTrips = () => {
         Featured Trips
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">
-        {trips?.map((trip: Record<string, any>) => (
+        {trips.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
-            className="col-span-12 md:col-span-6 lg:col-span-3 "
+            className="col-span-12 md:col-span-6 lg:col-span-3"
           >
             <TripCard trip={trip} />
           </div>

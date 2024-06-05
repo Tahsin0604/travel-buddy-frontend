@@ -7,7 +7,8 @@ import { useGetMYProfileQuery } from "@/redux/api/profile";
 import { useSendBuddyRequestMutation } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
 import { Button } from "antd";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,8 +43,8 @@ const TripRequestPage = ({
 
   const handleSubmit = async (data: FieldValues) => {
     const payload = {
-      userName: data.userName,
-      useEmail: data.useEmail,
+      userName: userData?.name,
+      useEmail: userData?.email,
       profilePic: userData?.profilePhoto,
       contactNumber: data.contactNumber,
     };
