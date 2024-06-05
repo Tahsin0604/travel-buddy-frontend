@@ -5,10 +5,11 @@ export const travelBuddyApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     sendBuddyRequest: build.mutation({
       query: ({ tripId, data }) => {
+        console.log({ tripId, data });
         return {
           url: `/trip/${tripId}/request`,
           method: "POST",
-          params: data,
+          data: data,
         };
       },
       invalidatesTags: [

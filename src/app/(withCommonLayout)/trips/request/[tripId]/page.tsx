@@ -45,10 +45,9 @@ const TripRequestPage = ({
     const payload = {
       userName: userData?.name,
       useEmail: userData?.email,
-      profilePic: userData?.profilePhoto,
       contactNumber: data.contactNumber,
     };
-    console.log(payload);
+
     try {
       const res: Record<string, any> = await sendBuddyRequest({
         tripId: tripId,
@@ -56,7 +55,7 @@ const TripRequestPage = ({
       });
       if (res?.data?.id) {
         setError("");
-        toast.success(res?.message);
+        toast.success("Request send successfully");
         router.push(`/trips/${tripId}`);
       } else {
         setError(res?.error?.message);
