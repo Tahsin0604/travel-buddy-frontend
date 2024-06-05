@@ -35,6 +35,7 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const config = error.config;
+    console.log(error);
     if (error?.response?.status === 401 && !config.sent) {
       console.log(error);
       config.sent = true;

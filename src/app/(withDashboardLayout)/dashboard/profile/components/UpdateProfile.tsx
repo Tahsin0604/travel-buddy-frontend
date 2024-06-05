@@ -37,7 +37,7 @@ const UpdateProfile = ({ open, setOpen, profileData }: TProps) => {
   const handleSubmit = async (data: FieldValues) => {
     try {
       const res: Record<string, any> = await updateMYProfile(data);
-      console.log(res);
+
       if (res?.data?.id) {
         setOpen(false);
         setError("");

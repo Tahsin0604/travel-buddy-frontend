@@ -176,7 +176,12 @@ const TripDetailsPage = ({
               </div>
               <div className="px-5 py-3 ">
                 {showRequestButton && (
-                  <Button size="large" type="primary" className=" w-full  ">
+                  <Button
+                    size="large"
+                    type="primary"
+                    className=" w-full  "
+                    href={`/trips/request/${tripId}`}
+                  >
                     <div className="flex justify-center items-center gap-4">
                       <p>REQUEST TO JOIN</p>
                       <ArrowRight />
