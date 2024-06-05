@@ -2,9 +2,6 @@
 const registerUser = async (data: any) => {
   const res = await fetch(`http://localhost:5000/api/register/user`, {
     method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
     body: JSON.stringify(data),
     cache: "no-cache",
   });
