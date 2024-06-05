@@ -20,7 +20,9 @@ const AuthComponent = () => {
     setUserImage(data?.profilePhoto);
     setUserName(data?.name);
   }, [data]);
+  console.log(data);
   const handleLogOut = async () => {
+    dispatch(baseApi.util.invalidateTags([tagTypes.myProfile]));
     logoutUser(router);
     dispatch(baseApi.util.invalidateTags([tagTypes.myProfile]));
   };

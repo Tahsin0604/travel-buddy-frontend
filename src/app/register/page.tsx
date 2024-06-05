@@ -43,9 +43,10 @@ const RegisterPage = () => {
 
   const handleSubmit = async (data: FieldValues) => {
     const { confirmPassword, ...payload } = data;
+    console.log(data);
     try {
       const res = await registerUser(payload);
-
+      console.log(res);
       if (res?.data?.id) {
         const loggedInData = {
           email: data.email,
