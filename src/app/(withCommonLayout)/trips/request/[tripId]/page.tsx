@@ -50,7 +50,10 @@ const TripRequestPage = ({
     };
     console.log(payload);
     try {
-      const res: Record<string, any> = await sendBuddyRequest(payload);
+      const res: Record<string, any> = await sendBuddyRequest({
+        tripId: tripId,
+        data: payload,
+      });
       if (res?.data?.id) {
         setError("");
         toast.success(res?.message);
