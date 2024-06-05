@@ -39,7 +39,7 @@ const TripDetailsPage = ({
     }
     setShowRequestButton(status);
   }, [trip, tripStatus]);
-
+  console.log(tripStatus);
   if (tripDetailsLoading) {
     return (
       <div className="flex justify-center mt-36">
