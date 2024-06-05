@@ -64,8 +64,8 @@ const TripRequestPage = ({
   };
   return (
     <div className="bg-slate-50 py-10 min-h-screen">
-      <div className="grid grid-cols-12 justify-center items-center bg-slate-50 gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
-        <div className="col-span-12 md:col-span-6 px-10 py-6 rounded-lg bg-white drop-shadow-md">
+      <div className="flex flex-col justify-center items-center bg-slate-50 gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
+        <div className="w-full md:w-1/2 px-10 py-6 rounded-lg bg-white drop-shadow-md">
           <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
             Request Now!!
           </h1>
@@ -86,7 +86,7 @@ const TripRequestPage = ({
             <InputField name="budget" label="Budget" disabled={true} />
             <InputField name="userName" label="User Name" disabled={true} />
             <InputField name="useEmail" label="User Email" disabled={true} />
-            <NumberField name="contactNumber" label="Contact Number" />
+            <InputField name="contactNumber" label="Contact Number" />
 
             <Button size="large" className="w-full" htmlType="submit">
               Request To Join

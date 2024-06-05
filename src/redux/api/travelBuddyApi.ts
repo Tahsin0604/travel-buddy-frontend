@@ -49,7 +49,7 @@ export const travelBuddyApi = baseApi.injectEndpoints({
     }),
 
     sendTripResponse: build.mutation({
-      query: ({ buddyId, data }) => {
+      query: (data) => {
         return {
           url: `/travel-buddies/${buddyId}/respond`,
           method: "PUT",
