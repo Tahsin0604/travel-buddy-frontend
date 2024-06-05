@@ -42,7 +42,7 @@ export const travelBuddyApi = baseApi.injectEndpoints({
         return {
           url: `/travel-buddies/`,
           method: "GET",
-          params: data,
+          data: data,
         };
       },
 

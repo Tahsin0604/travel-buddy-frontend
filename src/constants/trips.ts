@@ -30,7 +30,7 @@ export const TripTypeConstant = [
 ];
 
 export enum TravelStatus {
-  PENDING,
-  APPROVED,
-  REJECTED,
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
 }
