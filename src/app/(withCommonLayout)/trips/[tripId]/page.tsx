@@ -23,7 +23,7 @@ const TripDetailsPage = ({
   const [showRequestButton, setShowRequestButton] = useState(true);
 
   const { data: tripStatus, isLoading } = useGetStatusForATripRequestQuery(
-    { data: { tripId: tripId, userId: userData?.id } },
+    tripId,
     { skip: !loggedIn }
   );
   const { data: trip, isLoading: tripDetailsLoading } =

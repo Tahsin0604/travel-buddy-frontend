@@ -46,7 +46,6 @@ export const tripsAPi = baseApi.injectEndpoints({
     }),
     createTrip: build.mutation({
       query: (data) => {
-        console.log(data);
         return {
           url: "/trips/",
           method: "POST",
