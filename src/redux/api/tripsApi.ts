@@ -5,16 +5,11 @@ export const tripsAPi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getAllTrips: build.query({
       query: (args) => {
+        console.log(args);
         return {
           url: "/trips/",
           method: "GET",
           params: args,
-        };
-      },
-      transformResponse: (data, meta) => {
-        return {
-          trips: data,
-          meta: meta,
         };
       },
       providesTags: [tagTypes.trips],
@@ -25,12 +20,6 @@ export const tripsAPi = baseApi.injectEndpoints({
           url: `/trips/user/${userId}`,
           method: "GET",
           params: args,
-        };
-      },
-      transformResponse: (data, meta) => {
-        return {
-          trips: data,
-          meta: meta,
         };
       },
       providesTags: [tagTypes.myTrips],
