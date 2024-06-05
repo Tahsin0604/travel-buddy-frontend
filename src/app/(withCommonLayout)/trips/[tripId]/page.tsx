@@ -23,7 +23,7 @@ const TripDetailsPage = ({
   const [showRequestButton, setShowRequestButton] = useState(true);
 
   const { data: tripStatus, isLoading } = useGetStatusForATripRequestQuery(
-    { tripId: tripId, userId: userData?.id },
+    { data: { tripId: tripId, userId: userData?.id } },
     { skip: !loggedIn }
   );
   const { data: trip, isLoading: tripDetailsLoading } =
@@ -190,17 +190,17 @@ const TripDetailsPage = ({
                   </Button>
                 )}
                 {tripStatus?.status === TravelStatus.PENDING && (
-                  <p className="text-slate-800 text-xl font-semibold text-center bg-sky-300">
+                  <p className=" text-xl font-semibold text-center bg-sky-300 text-white rounded">
                     Request pending
                   </p>
                 )}
                 {tripStatus?.status === TravelStatus.APPROVED && (
-                  <p className="text-slate-800 text-xl font-semibold text-center bg-lime-500">
+                  <p className="text-white rounded text-xl font-semibold text-center bg-lime-500">
                     Request approved
                   </p>
                 )}
                 {tripStatus?.status === TravelStatus.REJECTED && (
-                  <p className="text-slate-800 text-xl font-semibold text-center bg-red-500">
+                  <p className="text-white rounded text-xl font-semibold text-center bg-red-500">
                     Request rejected
                   </p>
                 )}
