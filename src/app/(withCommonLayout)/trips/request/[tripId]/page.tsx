@@ -48,6 +48,7 @@ const TripRequestPage = ({
       profilePic: userData?.profilePhoto,
       contactNumber: data.contactNumber,
     };
+    console.log(payload);
     try {
       const res: Record<string, any> = await sendBuddyRequest(payload);
       if (res?.data?.id) {
