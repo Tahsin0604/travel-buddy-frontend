@@ -22,6 +22,7 @@ const TripDetailsPage = ({
   const loggedIn = isLoggedIn();
   const userData = getUserInfo();
   const [showRequestButton, setShowRequestButton] = useState(true);
+  const [isCreator, setIsCreator] = useState(false);
 
   const { data: tripStatus, isLoading } = useGetStatusForATripRequestQuery(
     tripId,
@@ -40,7 +41,12 @@ const TripDetailsPage = ({
     }
     setShowRequestButton(status);
   }, [trip, tripStatus]);
-  console.log(tripStatus);
+  useEffect(() => {
+    if (trip?.userId === userData?.id) {
+      setIsCreator(true);
+    }
+  }, [trip]);
+
   if (tripDetailsLoading) {
     return (
       <div className="flex justify-center mt-36">
@@ -49,7 +55,7 @@ const TripDetailsPage = ({
     );
   }
 
-  const isCreator = trip?.user === userData?.id;
+  console.log(isCreator);
 
   const stepsData: {
     title: string;
