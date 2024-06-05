@@ -22,9 +22,8 @@ const AuthComponent = () => {
   }, [data]);
   console.log(data);
   const handleLogOut = async () => {
-    dispatch(baseApi.util.invalidateTags([tagTypes.myProfile]));
     logoutUser(router);
-    dispatch(baseApi.util.invalidateTags([tagTypes.myProfile]));
+    dispatch(baseApi.util.invalidateTags([tagTypes.myProfile, tagTypes.user]));
   };
   return (
     <>
