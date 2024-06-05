@@ -29,9 +29,9 @@ export function middleware(req: NextRequest) {
   }
 
   const commonPrivateRouteMatched = commonPrivateRoutes.some((route) =>
-    typeof route === "string" ? route === pathname : route.test(pathname)
+    typeof route === "string" ? route === pathname : pathname.match(route)
   );
-
+  console.log(commonPrivateRouteMatched);
   if (accessToken && commonPrivateRouteMatched) {
     return NextResponse.next();
   }
