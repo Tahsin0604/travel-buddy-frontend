@@ -12,6 +12,7 @@ import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Image from "next/image";
 
 import { useEffect, useState } from "react";
+import BuddyTable from "./component/BuddyTable";
 
 const TripDetailsPage = ({
   params: { tripId },
@@ -208,6 +209,8 @@ const TripDetailsPage = ({
             </div>
           </div>
         </div>
+
+        {isCreator && <BuddyTable tripId={tripId}></BuddyTable>}
       </div>
     </div>
   );
