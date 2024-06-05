@@ -28,10 +28,10 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  const commonPrivateRouteMatched = commonPrivateRoutes.some((route) =>
-    typeof route === "string" ? route === pathname : pathname.match(route)
+  const commonPrivateRouteMatched = commonPrivateRoutes.some(
+    (route) => route === pathname || pathname.match(route)
   );
-  console.log(commonPrivateRouteMatched);
+
   if (accessToken && commonPrivateRouteMatched) {
     return NextResponse.next();
   }
@@ -50,5 +50,10 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/dashboard/:page*", "/trips/request/:page"],
+  matcher: [
+    "/login",
+    "/register",
+    "/dashboard/:page*",
+    "/trips/request/:page*",
+  ],
 };
