@@ -1,6 +1,7 @@
 "use client";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import Loading from "@/components/UI/Loading";
+import { TravelStatus } from "@/constants/trips";
 import { useGetStatusForATripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
 import { getUserInfo, isLoggedIn } from "@/services/auth.services";
@@ -187,6 +188,21 @@ const TripDetailsPage = ({
                       <ArrowRight />
                     </div>
                   </Button>
+                )}
+                {tripStatus?.status === TravelStatus.PENDING && (
+                  <p className="text-slate-800 text-xl font-semibold text-center bg-sky-300">
+                    Request pending
+                  </p>
+                )}
+                {tripStatus?.status === TravelStatus.APPROVED && (
+                  <p className="text-slate-800 text-xl font-semibold text-center bg-lime-500">
+                    Request approved
+                  </p>
+                )}
+                {tripStatus?.status === TravelStatus.REJECTED && (
+                  <p className="text-slate-800 text-xl font-semibold text-center bg-red-500">
+                    Request rejected
+                  </p>
                 )}
               </div>
             </div>

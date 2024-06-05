@@ -28,3 +28,9 @@ export const TripTypeConstant = [
     label: "MOUNTAIN TOURISM",
   },
 ];
+
+export enum TravelStatus {
+  PENDING,
+  APPROVED,
+  REJECTED,
+}
