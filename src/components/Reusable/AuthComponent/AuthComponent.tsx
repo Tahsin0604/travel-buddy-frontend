@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 const AuthComponent = () => {
   const router = useRouter();
   const { data } = useGetMYProfileQuery({});
-
+  const dispatch = useAppDispatch();
   const [userImage, setUserImage] = useState("");
   const [userName, setUserName] = useState("");
   useEffect(() => {
@@ -22,8 +22,12 @@ const AuthComponent = () => {
   }, [data]);
   const handleLogOut = async () => {
     await logoutUser(router);
-    setUserImage("");
-    setUserName("");
+    dispatch(
+      baseApi.util.invalidateTags([
+        { type: tagTypes.myProfile },
+        { type: tagTypes.user },
+      ])
+    );
   };
   return (
     <>
