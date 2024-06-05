@@ -1,24 +1,44 @@
 "use client";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import Loading from "@/components/UI/Loading";
+import { useGetStatusForATripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
-import { isLoggedIn } from "@/services/auth.services";
+import { getUserInfo, isLoggedIn } from "@/services/auth.services";
 import { CalendarFilled, CalendarOutlined } from "@ant-design/icons";
 import { Button, Col, Row } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Image from "next/image";
 
-import React from "react";
+import { useEffect, useState } from "react";
 
 const TripDetailsPage = ({
   params: { tripId },
 }: {
   params: { tripId: string };
 }) => {
-  const isLoggedIn = isLoggedIn();
+  const loggedIn = isLoggedIn();
+  const userData = getUserInfo();
+  const [showRequestButton, setShowRequestButton] = useState(true);
+
+  const { data: tripStatus, isLoading } = useGetStatusForATripRequestQuery(
+    { tripId: tripId, userId: userData?.id },
+    { skip: !loggedIn }
+  );
   const { data: trip, isLoading: tripDetailsLoading } =
     useGetTripDetailsQuery(tripId);
+
+  useEffect(() => {
+    let status = true;
+    if (trip?.userId === userData?.id) {
+      status = false;
+    }
+    if (tripStatus?.status) {
+      status = false;
+    }
+    setShowRequestButton(status);
+  }, [trip, tripStatus]);
+
   if (tripDetailsLoading) {
     return (
       <div className="flex justify-center mt-36">
@@ -26,6 +46,9 @@ const TripDetailsPage = ({
       </div>
     );
   }
+
+  const isCreator = trip?.user === userData?.id;
+
   const stepsData: {
     title: string;
     description: string;
@@ -152,12 +175,14 @@ const TripDetailsPage = ({
                 <p>{trip?.budget}</p>
               </div>
               <div className="px-5 py-3 ">
-                <Button size="large" type="primary" className=" w-full  ">
-                  <div className="flex justify-center items-center gap-4">
-                    <p>REQUEST TO JOIN</p>
-                    <ArrowRight />
-                  </div>
-                </Button>
+                {showRequestButton && (
+                  <Button size="large" type="primary" className=" w-full  ">
+                    <div className="flex justify-center items-center gap-4">
+                      <p>REQUEST TO JOIN</p>
+                      <ArrowRight />
+                    </div>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
