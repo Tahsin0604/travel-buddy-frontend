@@ -38,7 +38,7 @@ export const travelBuddyApi = baseApi.injectEndpoints({
     }),
 
     getStatusForATripRequest: build.query({
-      query: (data) => {
+      query: ({ data }) => {
         return {
           url: `/travel-buddies/`,
           method: "GET",
