@@ -8,7 +8,7 @@ const authRoutes = ["/login", "/register"];
 const commonPrivateRoutes = [
   "/dashboard/profile",
   "/dashboard/change-password",
-  /^\/trips\/request\/[^\/]+$/,
+  /^\/trips\/request/,
 ];
 const roleBasedPrivateRoutes = {
   USER: [/^\/dashboard\/user/],
