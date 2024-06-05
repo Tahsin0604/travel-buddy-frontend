@@ -12,18 +12,18 @@ import React, { useEffect, useState } from "react";
 
 const AuthComponent = () => {
   const router = useRouter();
-  const { data, refetch } = useGetMYProfileQuery({});
-  const dispatch = useAppDispatch();
+  const { data } = useGetMYProfileQuery({});
+
   const [userImage, setUserImage] = useState("");
   const [userName, setUserName] = useState("");
   useEffect(() => {
     setUserImage(data?.profilePhoto);
     setUserName(data?.name);
   }, [data]);
-  console.log(data);
   const handleLogOut = async () => {
     await logoutUser(router);
-    refetch();
+    setUserImage("");
+    setUserName("");
   };
   return (
     <>
