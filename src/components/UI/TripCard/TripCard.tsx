@@ -2,12 +2,13 @@
 import React from "react";
 import CustomSlider from "../CustomSlider/CustomSlider";
 import { MapPin } from "lucide-react";
-import { Avatar, Badge, Button } from "antd";
+import { Avatar, Badge, Button, Popconfirm, PopconfirmProps } from "antd";
 import { DeleteOutlined, EditOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import dayjs from "dayjs";
 import { useDeleteTripMutation } from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const TripCard = ({
   trip,
@@ -22,10 +23,16 @@ const TripCard = ({
     const res = await deleteTrip(trip?.id);
 
     console.log(res);
-    if (res.data) {
+    if (res.data.id) {
+      toast.success(res?.data?.message);
       router.push("/dashboard/user/my-trips");
     }
   };
+
+  const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    onDelete();
+  };
+
   return (
     <div className="rounded-md shadow">
       <Badge.Ribbon
@@ -86,14 +93,22 @@ const TripCard = ({
                   disabled={isLoading}
                   href={`/dashboard/user/update-trips/${trip?.id}`}
                 ></Button>
-                <Button
-                  size="small"
-                  danger
-                  icon={<DeleteOutlined color="red" />}
-                  title="Rejected"
-                  disabled={isLoading}
-                  onClick={() => onDelete()}
-                ></Button>
+                <Popconfirm
+                  title="Delete the trip"
+                  placement="topRight"
+                  description="Are you sure to delete this trip?"
+                  onConfirm={confirm}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <Button
+                    size="small"
+                    danger
+                    icon={<DeleteOutlined color="red" />}
+                    title="Delete"
+                    disabled={isLoading}
+                  ></Button>
+                </Popconfirm>
               </div>
             )}
           </Link>

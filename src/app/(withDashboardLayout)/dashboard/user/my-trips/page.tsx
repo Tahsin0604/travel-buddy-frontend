@@ -1,3 +1,4 @@
+"use client";
 import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
 import TripCard from "@/components/UI/TripCard/TripCard";
 import TripCardSkeleton from "@/components/UI/TripCard/TripCardSkeleton";
