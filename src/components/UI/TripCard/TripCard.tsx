@@ -86,7 +86,7 @@ const TripCard = ({
             </p>
           </Link>
           {owner && (
-            <div className=" mt-2 flex justify-end items-center gap-4">
+            <div className="flex justify-end items-center gap-2 pr-4 pb-2">
               <Button
                 size="small"
                 icon={<EditOutlined color="blue" />}
