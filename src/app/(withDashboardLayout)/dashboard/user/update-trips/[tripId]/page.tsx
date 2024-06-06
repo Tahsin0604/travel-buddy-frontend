@@ -22,6 +22,7 @@ import {
 } from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
 import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
+import Loading from "@/components/UI/Loading";
 
 const updateTripValidation = z.object({
   destination: z.string(),
@@ -51,9 +52,15 @@ const UpdateTripsPage = ({
   >([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
 
   useEffect(() => {
-    setImages(trip?.images);
-    setItinerary(trip?.itinerary);
+    if (trip) {
+      console.log("Trip data:", trip);
+      setImages([...trip.images]);
+      const temp = [...trip.itinerary];
+      console.log(temp);
+      setItinerary([...temp]);
+    }
   }, [trip]);
+  console.log(itinerary);
   const [error, setError] = useState("");
   const router = useRouter();
   const dateFormat = "YYYY-MM-DD";
@@ -133,6 +140,14 @@ const UpdateTripsPage = ({
       }
     }
   };
+
+  if (tripDetailsLoading) {
+    return (
+      <div className="flex justify-center mt-36">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full px-6 md:px-20 lg:px-48 py-6 rounded-lg bg-white">

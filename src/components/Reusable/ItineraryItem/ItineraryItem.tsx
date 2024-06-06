@@ -35,10 +35,11 @@ const ItineraryItem = ({
     itinerary[index]?.activities
   );
   const startDay = itinerary[index]?.startDay;
-  useEffect(() => {
-    setNights(itinerary[index]?.nights);
-    setActivities(itinerary[index]?.activities);
-  }, [itinerary]);
+  // useEffect(() => {
+  //   setNights(itinerary[index]?.nights);
+  //   setActivities(itinerary[index]?.activities);
+  // }, [itinerary]);
+
   useEffect(() => {
     const newItinerary = [...itinerary];
 
@@ -49,6 +50,7 @@ const ItineraryItem = ({
       activities,
     };
     const tempItinerary = newItinerary.map((item, i) => {
+      console.log(item, i);
       if (i > index) {
         const prevItem = newItinerary[i - 1];
         item.startDay = prevItem.endDay;
