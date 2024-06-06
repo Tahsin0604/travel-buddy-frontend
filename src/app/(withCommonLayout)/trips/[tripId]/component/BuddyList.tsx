@@ -82,7 +82,7 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
   };
 
   return (
-    <div className="my-3 h-96 overflow-auto px-2 border rounded">
+    <div className="my-3 min-h-[400px] overflow-auto px-4 py-2 border rounded">
       <InfiniteScroll
         dataLength={listData.length}
         next={loadMoreData}
@@ -110,7 +110,12 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
                   title={
                     <a href={`/profile/${item.userId}`}>{item?.userName}</a>
                   }
-                  description={`Email: ${item.useEmail}, Contact Number: ${item.contactNumber}`}
+                  description={
+                    <>
+                      <p>Email: ${item.useEmail}</p>
+                      <p>Contact Number: ${item.contactNumber} </p>
+                    </>
+                  }
                 />
                 <div className="my-4">
                   {item.status === TravelStatus.PENDING && (
