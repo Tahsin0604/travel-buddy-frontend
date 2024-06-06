@@ -22,6 +22,7 @@ type TProps = {
       }[]
     >
   >;
+  updateInitial?: boolean;
 };
 
 const ItineraryItem = ({
@@ -29,6 +30,7 @@ const ItineraryItem = ({
   removeItem,
   itinerary,
   setItinerary,
+  updateInitial = false,
 }: TProps) => {
   const [nights, setNights] = useState<number>(itinerary[index]?.nights);
   const [activities, setActivities] = useState<string>(
@@ -41,27 +43,30 @@ const ItineraryItem = ({
   // }, [itinerary]);
 
   useEffect(() => {
-    const newItinerary = [...itinerary];
+    if (updateInitial) {
+      const newItinerary = [...itinerary];
 
-    newItinerary[index] = {
-      startDay: startDay,
-      endDay: startDay + nights,
-      nights,
-      activities,
-    };
-    const tempItinerary = newItinerary.map((item, i) => {
-      console.log(item, i);
-      if (i > index && item) {
-        console.log(i, index);
-        const prevItem = newItinerary[i - 1];
-        item.startDay = prevItem.endDay;
-        item.endDay = item.startDay + item.nights;
-      }
+      newItinerary[index] = {
+        startDay: startDay,
+        endDay: startDay + nights,
+        nights,
+        activities,
+      };
 
-      return item;
-    });
+      const tempItinerary = newItinerary.map((item, i) => {
+        console.log(item, i);
+        if (i > index && item) {
+          const prevItem = newItinerary[i - 1];
+          console.log(i, index, item);
+          item.startDay = prevItem.endDay;
+          item.endDay = item.startDay + item.nights;
+        }
 
-    setItinerary(tempItinerary);
+        return item;
+      });
+
+      setItinerary(tempItinerary);
+    }
   }, [nights, activities]);
 
   const endDay = nights > 0 ? startDay + nights : startDay;

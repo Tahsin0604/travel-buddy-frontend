@@ -47,6 +47,7 @@ const UpdateTripsPage = ({
   const [updateTrip, { isLoading: createLoading }] = useUpdateTripMutation();
 
   const [images, setImages] = useState<string[]>([]);
+  const [updateItinerary, setUpdateItinerary] = useState<boolean>(true);
   const [itinerary, setItinerary] = useState<
     { startDay: number; endDay: number; nights: number; activities: string }[]
   >([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
@@ -75,6 +76,7 @@ const UpdateTripsPage = ({
   };
 
   const addItineraryItem = () => {
+    setUpdateItinerary(false);
     const lastItinerary = itinerary[itinerary.length - 1];
     const startDay = lastItinerary.endDay;
     setItinerary([
@@ -84,6 +86,7 @@ const UpdateTripsPage = ({
   };
 
   const removeItineraryItem = (index: number) => {
+    setUpdateItinerary(false);
     const newItinerary = itinerary.filter((_, i) => i !== index);
 
     const tempItinerary = newItinerary.map((item, i) => {
@@ -206,6 +209,7 @@ const UpdateTripsPage = ({
               itinerary={itinerary}
               setItinerary={setItinerary}
               removeItem={removeItineraryItem}
+              updateInitial={updateItinerary}
             />
           ))}
           <Button type="dashed" className="mt-3" onClick={addItineraryItem}>
