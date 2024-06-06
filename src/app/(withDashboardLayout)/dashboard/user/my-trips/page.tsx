@@ -33,7 +33,7 @@ const MyTripsPage = () => {
         {trips?.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
-            className="col-span-12 md:col-span-6 lg:col-span-3 "
+            className="col-span-12 md:col-span-6 lg:col-span-3 h-full"
           >
             <TripCard trip={trip} owner={true} />
           </div>

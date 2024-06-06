@@ -40,7 +40,7 @@ const TripCard = ({
         color="cyan"
         style={{ zIndex: 10 }}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-hidden h-full">
           <div className="relative ">
             <div className="h-56 w-full rounded-t-md overflow-hidden">
               <CustomSlider images={trip?.images} />
@@ -68,12 +68,12 @@ const TripCard = ({
               with{"  "}
               <Link
                 href={`/profile/${trip?.userId}`}
-                className="underline text-lg text-slate-700 font-semibold underline-offset-1"
+                className="underline  text-slate-700 font-semibold underline-offset-1"
               >
                 {trip?.user?.name}
               </Link>
             </p>
-            <p className="text-slate-800 text-xl py-3 font-bold hover:text-sky-700 transition-colors ease-in-out duration-150">
+            <p className="text-slate-800 text-lg py-3 font-bold hover:text-sky-700 transition-colors ease-in-out duration-150">
               {trip?.tripTitle.length > 40
                 ? trip?.tripTitle.slice(40).concat("...")
                 : trip?.tripTitle}
@@ -84,37 +84,37 @@ const TripCard = ({
                 .toUpperCase()}{" "}
               &#8226; {trip?.itinerary[trip?.itinerary.length - 1]?.endDay} Days
             </p>
-            {owner && (
-              <div className=" mt-2 flex justify-end items-center gap-4">
+          </Link>
+          {owner && (
+            <div className=" mt-2 flex justify-end items-center gap-4">
+              <Button
+                size="small"
+                icon={<EditOutlined color="blue" />}
+                title="Approved"
+                disabled={isLoading}
+                href={`/dashboard/user/update-trips/${trip?.id}`}
+              ></Button>
+              <Popconfirm
+                title="Delete the trip"
+                placement="topRight"
+                description="Are you sure to delete this trip?"
+                onConfirm={confirm}
+                okText="Yes"
+                cancelText="No"
+              >
                 <Button
                   size="small"
-                  icon={<EditOutlined color="blue" />}
-                  title="Approved"
+                  danger
+                  icon={<DeleteOutlined color="red" />}
+                  title="Delete"
                   disabled={isLoading}
-                  href={`/dashboard/user/update-trips/${trip?.id}`}
+                  style={{
+                    zIndex: 10,
+                  }}
                 ></Button>
-                <Popconfirm
-                  title="Delete the trip"
-                  placement="topRight"
-                  description="Are you sure to delete this trip?"
-                  onConfirm={confirm}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button
-                    size="small"
-                    danger
-                    icon={<DeleteOutlined color="red" />}
-                    title="Delete"
-                    disabled={isLoading}
-                    style={{
-                      zIndex: 10,
-                    }}
-                  ></Button>
-                </Popconfirm>
-              </div>
-            )}
-          </Link>
+              </Popconfirm>
+            </div>
+          )}
         </div>
       </Badge.Ribbon>
     </div>
