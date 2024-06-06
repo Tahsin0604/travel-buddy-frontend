@@ -55,10 +55,10 @@ const ItineraryItem = ({
       };
 
       const tempItinerary = newItinerary.map((item, i) => {
-        console.log(item, i);
-        if (i > index && item) {
+        if (i > index) {
           const prevItem = newItinerary[i - 1];
-          console.log(i, index, item);
+          console.log(prevItem);
+
           item.startDay = prevItem.endDay;
           item.endDay = item.startDay + item.nights;
         }
@@ -81,7 +81,11 @@ const ItineraryItem = ({
         <div>
           <p className="text-center">Nights</p>
           <div className="flex items-center  gap-4">
-            <Button size="large" onClick={() => setNights(nights - 1)}>
+            <Button
+              size="large"
+              disabled={!updateItinerary}
+              onClick={() => setNights(nights - 1)}
+            >
               -
             </Button>
             <InputNumber
@@ -90,7 +94,11 @@ const ItineraryItem = ({
               size="large"
               disabled={true}
             />
-            <Button size="large" onClick={() => setNights(nights + 1)}>
+            <Button
+              size="large"
+              disabled={!updateItinerary}
+              onClick={() => setNights(nights + 1)}
+            >
               +
             </Button>
           </div>
@@ -98,6 +106,7 @@ const ItineraryItem = ({
       </div>
 
       <TextArea
+        disabled={!updateItinerary}
         value={itinerary[index]?.activities}
         placeholder="write activities"
         required
