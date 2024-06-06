@@ -112,8 +112,8 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
                   }
                   description={
                     <>
-                      <p>Email: ${item.useEmail}</p>
-                      <p>Contact Number: ${item.contactNumber} </p>
+                      <p>Email: {item.useEmail}</p>
+                      <p>Contact Number: {item.contactNumber} </p>
                     </>
                   }
                 />
