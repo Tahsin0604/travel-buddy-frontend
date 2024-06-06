@@ -217,7 +217,7 @@ const UpdateTripsPage = ({
               itinerary={itinerary}
               setItinerary={setItinerary}
               removeItem={removeItineraryItem}
-              updateInitial={updateItinerary}
+              updateItinerary={updateItinerary}
             />
           ))}
           <Button
