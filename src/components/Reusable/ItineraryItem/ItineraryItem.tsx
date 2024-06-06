@@ -22,7 +22,7 @@ type TProps = {
       }[]
     >
   >;
-  updateInitial?: boolean;
+  updateItinerary?: boolean;
 };
 
 const ItineraryItem = ({
@@ -30,20 +30,20 @@ const ItineraryItem = ({
   removeItem,
   itinerary,
   setItinerary,
-  updateInitial = false,
+  updateItinerary = true,
 }: TProps) => {
   const [nights, setNights] = useState<number>(itinerary[index]?.nights);
   const [activities, setActivities] = useState<string>(
     itinerary[index]?.activities
   );
   const startDay = itinerary[index]?.startDay;
-  // useEffect(() => {
-  //   setNights(itinerary[index]?.nights);
-  //   setActivities(itinerary[index]?.activities);
-  // }, [itinerary]);
+  useEffect(() => {
+    setNights(itinerary[index]?.nights);
+    setActivities(itinerary[index]?.activities);
+  }, [itinerary]);
 
   useEffect(() => {
-    if (updateInitial) {
+    if (updateItinerary) {
       const newItinerary = [...itinerary];
 
       newItinerary[index] = {
@@ -104,7 +104,12 @@ const ItineraryItem = ({
       />
       {itinerary.length > 1 && (
         <div className="flex justify-end">
-          <Button type="primary" danger onClick={() => removeItem(index)}>
+          <Button
+            disabled={!updateItinerary}
+            type="primary"
+            danger
+            onClick={() => removeItem(index)}
+          >
             Remove
           </Button>
         </div>

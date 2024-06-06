@@ -76,7 +76,6 @@ const UpdateTripsPage = ({
   };
 
   const addItineraryItem = () => {
-    setUpdateItinerary(true);
     const lastItinerary = itinerary[itinerary.length - 1];
     const startDay = lastItinerary.endDay;
     setItinerary([
@@ -86,7 +85,6 @@ const UpdateTripsPage = ({
   };
 
   const removeItineraryItem = (index: number) => {
-    setUpdateItinerary(true);
     const newItinerary = itinerary.filter((_, i) => i !== index);
 
     const tempItinerary = newItinerary.map((item, i) => {
@@ -125,7 +123,7 @@ const UpdateTripsPage = ({
         .format("YYYY-MM-DD");
 
       values.itinerary = itinerary;
-      console.log(values);
+
       try {
         const res: Record<string, any> = await updateTrip({
           id: tripId,
@@ -202,7 +200,16 @@ const UpdateTripsPage = ({
         <NumberField name="budget" label="Budget" />
 
         <div className="mb-4">
-          <h3 className="text-xl font-semibold">Itinerary</h3>
+          <div className="flex justify-between items-center">
+            <h3 className="text-xl font-semibold">Itinerary</h3>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => setUpdateItinerary(true)}
+            >
+              Update Itinerary
+            </Button>
+          </div>
           {itinerary.map((_, index) => (
             <ItineraryItem
               key={index}
@@ -213,7 +220,12 @@ const UpdateTripsPage = ({
               updateInitial={updateItinerary}
             />
           ))}
-          <Button type="dashed" className="mt-3" onClick={addItineraryItem}>
+          <Button
+            type="dashed"
+            className="mt-3"
+            onClick={addItineraryItem}
+            disabled={!updateItinerary}
+          >
             Add Itinerary Item
           </Button>
         </div>
