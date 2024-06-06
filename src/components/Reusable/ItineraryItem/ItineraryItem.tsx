@@ -51,7 +51,7 @@ const ItineraryItem = ({
     };
     const tempItinerary = newItinerary.map((item, i) => {
       console.log(item, i);
-      if (i > index) {
+      if (i > index && item) {
         console.log(i, index);
         const prevItem = newItinerary[i - 1];
         item.startDay = prevItem.endDay;
