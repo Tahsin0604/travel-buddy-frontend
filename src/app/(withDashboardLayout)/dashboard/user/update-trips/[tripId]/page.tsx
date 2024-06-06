@@ -125,6 +125,7 @@ const UpdateTripsPage = ({
         .format("YYYY-MM-DD");
 
       values.itinerary = itinerary;
+      console.log(values);
       try {
         const res: Record<string, any> = await updateTrip({
           id: tripId,
@@ -160,7 +161,7 @@ const UpdateTripsPage = ({
 
       {error && (
         <div>
-          <p className="bg-red-500 py-3 text-white text-center rounded mt-1">
+          <p className="bg-red-500 py-3 text-white text-center rounded my-1">
             {error}
           </p>
         </div>
