@@ -21,7 +21,7 @@ const MyTripsPage = () => {
     renderComponent = (
       <>
         {Array.from({ length: 12 }, (v, i) => i).map((item) => (
-          <div key={item} className="col-span-12 md:col-span-6 lg:col-span-4 ">
+          <div key={item} className="col-span-12 md:col-span-6 lg:col-span-3 ">
             <TripCardSkeleton />
           </div>
         ))}
@@ -33,7 +33,7 @@ const MyTripsPage = () => {
         {trips?.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
-            className="col-span-12 md:col-span-6 lg:col-span-4 "
+            className="col-span-12 md:col-span-6 lg:col-span-3 "
           >
             <TripCard trip={trip} owner={true} />
           </div>

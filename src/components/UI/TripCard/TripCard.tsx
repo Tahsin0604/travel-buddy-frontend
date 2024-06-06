@@ -30,6 +30,7 @@ const TripCard = ({
   };
 
   const confirm: PopconfirmProps["onConfirm"] = (e) => {
+    e.stoppropagation();
     onDelete();
   };
 
@@ -107,6 +108,9 @@ const TripCard = ({
                     icon={<DeleteOutlined color="red" />}
                     title="Delete"
                     disabled={isLoading}
+                    style={{
+                      zIndex: 30,
+                    }}
                   ></Button>
                 </Popconfirm>
               </div>

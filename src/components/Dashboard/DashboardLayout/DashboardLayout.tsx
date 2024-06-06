@@ -34,7 +34,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         >
           <div className="flex justify-end items-center gap-4">
             <AuthButton />
-            <button onClick={() => setVisible(true)} className="md:hidden">
+            <button onClick={() => setVisible(true)} className="lg:hidden">
               <MenuOutlined />
             </button>
           </div>
