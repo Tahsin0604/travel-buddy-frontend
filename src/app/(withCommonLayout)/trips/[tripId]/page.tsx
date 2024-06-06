@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import Loading from "@/components/UI/Loading";
@@ -6,13 +7,13 @@ import { useGetStatusForATripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
 import { getUserInfo, isLoggedIn } from "@/services/auth.services";
 import { CalendarFilled, CalendarOutlined } from "@ant-design/icons";
-import { Button, Col, Row } from "antd";
+import { Button } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Image from "next/image";
 
 import { useEffect, useState } from "react";
-import BuddyTable from "./component/BuddyTable";
+import BuddyList from "./component/BuddyList";
 
 const TripDetailsPage = ({
   params: { tripId },
@@ -41,6 +42,7 @@ const TripDetailsPage = ({
     }
     setShowRequestButton(status);
   }, [trip, tripStatus]);
+
   useEffect(() => {
     if (trip?.userId === userData?.id) {
       setIsCreator(true);
@@ -54,8 +56,6 @@ const TripDetailsPage = ({
       </div>
     );
   }
-
-  console.log(isCreator);
 
   const stepsData: {
     title: string;
@@ -72,6 +72,7 @@ const TripDetailsPage = ({
       description: item.activities,
     };
   });
+
   return (
     <div>
       <div className="h-[50vh] lg:h-[80vh]">
@@ -166,57 +167,59 @@ const TripDetailsPage = ({
               </div>
             )}
           </div>
-          <div className="col-span-12 md:col-span-4 px-7 py-3 relative">
-            <div className="border rounded-md flex flex-col gap-5 md:sticky md:top-20">
-              <div className="flex gap-2 text-slate-400 px-5 py-3 border-b">
-                <CalendarFilled />
-                {dayjs(trip?.startDate, "YYYY-MM-DD")
-                  .format("DD MMM YY")
-                  .toUpperCase()}
-                <ArrowRight />
-                {dayjs(trip?.endDate, "YYYY-MM-DD")
-                  .format("DD MMM YY")
-                  .toUpperCase()}
+
+          <div className="col-span-12 lg:col-span-4 px-7 py-3 relative">
+            <div className=" lg:sticky lg:top-20">
+              <div className="border rounded-md flex flex-col gap-5">
+                <div className="flex gap-2 text-slate-400 px-5 py-3 border-b">
+                  <CalendarFilled />
+                  {dayjs(trip?.startDate, "YYYY-MM-DD")
+                    .format("DD MMM YY")
+                    .toUpperCase()}
+                  <ArrowRight />
+                  {dayjs(trip?.endDate, "YYYY-MM-DD")
+                    .format("DD MMM YY")
+                    .toUpperCase()}
+                </div>
+                <div className="flex justify justify-between items-center text-slate-800 text-xl font-semibold px-5 py-3">
+                  <p>TOTAL PRICE</p>
+                  <p>{trip?.budget}</p>
+                </div>
+                <div className="px-5 py-3 ">
+                  {showRequestButton && (
+                    <Button
+                      size="large"
+                      type="primary"
+                      className=" w-full  "
+                      href={`/trips/request/${tripId}`}
+                    >
+                      <div className="flex justify-center items-center gap-4">
+                        <p>REQUEST TO JOIN</p>
+                        <ArrowRight />
+                      </div>
+                    </Button>
+                  )}
+                  {tripStatus?.status === TravelStatus.PENDING && (
+                    <p className=" text-xl font-semibold text-center bg-sky-300 text-white rounded">
+                      Request pending
+                    </p>
+                  )}
+                  {tripStatus?.status === TravelStatus.APPROVED && (
+                    <p className="text-white rounded text-xl font-semibold text-center bg-lime-500">
+                      Request approved
+                    </p>
+                  )}
+                  {tripStatus?.status === TravelStatus.REJECTED && (
+                    <p className="text-white rounded text-xl font-semibold text-center bg-red-500">
+                      Request rejected
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="flex justify justify-between items-center text-slate-800 text-xl font-semibold px-5 py-3">
-                <p>TOTAL PRICE</p>
-                <p>{trip?.budget}</p>
-              </div>
-              <div className="px-5 py-3 ">
-                {showRequestButton && (
-                  <Button
-                    size="large"
-                    type="primary"
-                    className=" w-full  "
-                    href={`/trips/request/${tripId}`}
-                  >
-                    <div className="flex justify-center items-center gap-4">
-                      <p>REQUEST TO JOIN</p>
-                      <ArrowRight />
-                    </div>
-                  </Button>
-                )}
-                {tripStatus?.status === TravelStatus.PENDING && (
-                  <p className=" text-xl font-semibold text-center bg-sky-300 text-white rounded">
-                    Request pending
-                  </p>
-                )}
-                {tripStatus?.status === TravelStatus.APPROVED && (
-                  <p className="text-white rounded text-xl font-semibold text-center bg-lime-500">
-                    Request approved
-                  </p>
-                )}
-                {tripStatus?.status === TravelStatus.REJECTED && (
-                  <p className="text-white rounded text-xl font-semibold text-center bg-red-500">
-                    Request rejected
-                  </p>
-                )}
-              </div>
+              <>{isCreator && <BuddyList tripId={tripId} />}</>
             </div>
           </div>
         </div>
-
-        {isCreator && <BuddyTable tripId={tripId}></BuddyTable>}
       </div>
     </div>
   );
