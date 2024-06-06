@@ -37,10 +37,11 @@ const ItineraryItem = ({
     itinerary[index]?.activities
   );
   const startDay = itinerary[index]?.startDay;
-  // useEffect(() => {
-  //   setNights(itinerary[index]?.nights);
-  //   setActivities(itinerary[index]?.activities);
-  // }, [itinerary]);
+
+  useEffect(() => {
+    setNights(itinerary[index]?.nights);
+    setActivities(itinerary[index]?.activities);
+  }, [itinerary]);
 
   useEffect(() => {
     if (updateItinerary) {
