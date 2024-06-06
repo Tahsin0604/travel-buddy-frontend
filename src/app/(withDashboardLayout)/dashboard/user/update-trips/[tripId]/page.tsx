@@ -16,11 +16,14 @@ import dayjs from "dayjs";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import ImageUploadModal from "@/components/Forms/ImageUploadModal";
 import { toast } from "sonner";
-import { useCreateTripMutation } from "@/redux/api/tripsApi";
+import {
+  useGetTripDetailsQuery,
+  useUpdateTripMutation,
+} from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
 import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
 
-const createTripValidation = z.object({
+const updateTripValidation = z.object({
   destination: z.string(),
   tripType: z.enum([...TripTypeConstant.map((trip) => trip.value)] as [
     string,
@@ -32,25 +35,32 @@ const createTripValidation = z.object({
   budget: z.number(),
 });
 
-const defaultValue = {
-  destination: "",
-  tripType: {},
-  tripTitle: "",
-  description: "",
-  startDate: "",
-  budget: 0,
-};
-const CreateTripsPage = () => {
-  const [images, setImages] = useState<string[]>([]);
+const UpdateTripsPage = ({
+  params: { tripId },
+}: {
+  params: { tripId: string };
+}) => {
+  const { data: trip, isLoading: tripDetailsLoading } =
+    useGetTripDetailsQuery(tripId);
+
+  const [updateTrip, { isLoading: createLoading }] = useUpdateTripMutation();
+
+  const [images, setImages] = useState<string[]>([...trip?.images]);
   const [itinerary, setItinerary] = useState<
     { startDay: number; endDay: number; nights: number; activities: string }[]
-  >([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
-
+  >([...trip?.itinerary]);
   const [error, setError] = useState("");
   const router = useRouter();
-  const [createTrip, { isLoading: createLoading }] = useCreateTripMutation();
   const dateFormat = "YYYY-MM-DD";
   const date = dayjs(new Date()).format(dateFormat);
+  const defaultValue = {
+    destination: trip?.destination,
+    tripType: trip?.tripType,
+    tripTitle: trip?.tripTitle,
+    description: trip?.description,
+    startDate: trip?.startDate,
+    budget: trip?.budget,
+  };
 
   const addItineraryItem = () => {
     const lastItinerary = itinerary[itinerary.length - 1];
@@ -101,14 +111,15 @@ const CreateTripsPage = () => {
 
       values.itinerary = itinerary;
       try {
-        const res: Record<string, any> = await createTrip(values);
+        const res: Record<string, any> = await updateTrip({
+          id: tripId,
+          data: values,
+        });
         console.log(res);
         if (res?.data?.id) {
-          setItinerary([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
-          setImages([]);
           setError("");
           toast.success("Trips added successfully");
-          router.push(`/trips/${res?.data?.id}`);
+          router.push(`/trips/${tripId}`);
         } else {
           setError(res?.error?.message);
         }
@@ -121,7 +132,7 @@ const CreateTripsPage = () => {
   return (
     <div className="w-full px-6 md:px-20 lg:px-48 py-6 rounded-lg bg-white">
       <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
-        Write New Post !!
+        Update Post !!
       </h1>
 
       {error && (
@@ -144,7 +155,7 @@ const CreateTripsPage = () => {
       <ReusableForm
         defaultValues={defaultValue}
         onSubmit={handleSubmit}
-        resolver={zodResolver(createTripValidation)}
+        resolver={zodResolver(updateTripValidation)}
       >
         <InputField name="destination" label="Destination" />
         <MultipleSelect
@@ -188,11 +199,11 @@ const CreateTripsPage = () => {
           htmlType="submit"
           disabled={createLoading}
         >
-          Create
+          Update
         </Button>
       </ReusableForm>
     </div>
   );
 };
 
-export default CreateTripsPage;
+export default UpdateTripsPage;
