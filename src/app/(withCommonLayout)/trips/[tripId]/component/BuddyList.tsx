@@ -79,10 +79,17 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
         status: response,
       },
     });
+    if ("data" in res && res.data) {
+      setListData((prevListData) =>
+        prevListData.map((item) =>
+          item.key === id ? { ...item, status: response } : item
+        )
+      );
+    }
   };
 
   return (
-    <div className="my-3 min-h-[400px] overflow-auto px-4 py-2 border rounded">
+    <div className="my-3 max-h-[450px] overflow-auto px-4 py-2 border rounded">
       <InfiniteScroll
         dataLength={listData.length}
         next={loadMoreData}
@@ -127,12 +134,12 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
                   {item.status === TravelStatus.REJECTED && <>request denied</>}
                 </div>
                 <div>
-                  <Space size="middle">
+                  <Space size="small">
                     {item.status === TravelStatus.PENDING && (
                       <>
                         <Button
                           size="small"
-                          icon={<CheckOutlined />}
+                          icon={<CheckOutlined color="blue" />}
                           title="Approved"
                           disabled={responseLoading}
                           onClick={() =>
@@ -141,7 +148,8 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
                         ></Button>
                         <Button
                           size="small"
-                          icon={<CloseOutlined />}
+                          danger
+                          icon={<CloseOutlined color="red" />}
                           title="Rejected"
                           disabled={responseLoading}
                           onClick={() =>
@@ -154,7 +162,8 @@ const BuddyList = ({ tripId }: { tripId: string }) => {
                       <>
                         <Button
                           size="small"
-                          icon={<CloseOutlined />}
+                          danger
+                          icon={<CloseOutlined color="red" />}
                           title="Rejected"
                           disabled={responseLoading}
                           onClick={() =>

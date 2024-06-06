@@ -61,15 +61,6 @@ export const travelBuddyApi = baseApi.injectEndpoints({
           data: data,
         };
       },
-      invalidatesTags: (result) =>
-        result
-          ? [
-              {
-                type: tagTypes.tripBuddy as const,
-                id: result.id,
-              },
-            ]
-          : [tagTypes.tripBuddy],
     }),
   }),
 });

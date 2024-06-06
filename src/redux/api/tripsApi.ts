@@ -65,9 +65,9 @@ export const tripsAPi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.myTrips, tagTypes.trips],
     }),
     deleteTrip: build.mutation({
-      query: (data) => {
+      query: (id) => {
         return {
-          url: `/trips/${data.id}`,
+          url: `/trips/${id}`,
           method: "DELETE",
         };
       },

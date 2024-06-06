@@ -1,12 +1,31 @@
+"use client";
 import React from "react";
 import CustomSlider from "../CustomSlider/CustomSlider";
 import { MapPin } from "lucide-react";
-import { Avatar, Badge } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Badge, Button } from "antd";
+import { DeleteOutlined, EditOutlined, UserOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import dayjs from "dayjs";
+import { useDeleteTripMutation } from "@/redux/api/tripsApi";
+import { useRouter } from "next/navigation";
 
-const TripCard = ({ trip }: { trip: Record<string, any> }) => {
+const TripCard = ({
+  trip,
+  owner = false,
+}: {
+  trip: Record<string, any>;
+  owner?: boolean;
+}) => {
+  const router = useRouter();
+  const [deleteTrip, { isLoading }] = useDeleteTripMutation();
+  const onDelete = async () => {
+    const res = await deleteTrip(trip?.id);
+
+    console.log(res);
+    if (res.data) {
+      router.push("/dashboard/user/my-trips");
+    }
+  };
   return (
     <div className="rounded-md shadow">
       <Badge.Ribbon
@@ -58,6 +77,25 @@ const TripCard = ({ trip }: { trip: Record<string, any> }) => {
                 .toUpperCase()}{" "}
               &#8226; {trip?.itinerary[trip?.itinerary.length - 1]?.endDay} Days
             </p>
+            {owner && (
+              <div className=" mt-2 flex justify-end items-center gap-4">
+                <Button
+                  size="small"
+                  icon={<EditOutlined color="blue" />}
+                  title="Approved"
+                  disabled={isLoading}
+                  href={`/dashboard/user/update-trips/${trip?.id}`}
+                ></Button>
+                <Button
+                  size="small"
+                  danger
+                  icon={<DeleteOutlined color="red" />}
+                  title="Rejected"
+                  disabled={isLoading}
+                  onClick={() => onDelete()}
+                ></Button>
+              </div>
+            )}
           </Link>
         </div>
       </Badge.Ribbon>
