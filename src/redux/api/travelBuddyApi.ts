@@ -12,12 +12,8 @@ export const travelBuddyApi = baseApi.injectEndpoints({
           data: data,
         };
       },
-      invalidatesTags: [
-        tagTypes.tripBuddy,
-        tagTypes.trips,
-        tagTypes.user,
-        tagTypes.myProfile,
-      ],
+
+      invalidatesTags: [tagTypes.tripBuddy],
     }),
 
     getAllBuddyForATrips: build.query({
@@ -28,13 +24,22 @@ export const travelBuddyApi = baseApi.injectEndpoints({
           params: args,
         };
       },
-      transformResponse: (data, meta) => {
+      transformResponse: (data: Record<string, any>[], meta) => {
         return {
           buddy: data,
           meta: meta,
         };
       },
-      providesTags: [tagTypes.tripBuddy],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.buddy.map(({ id }) => ({
+                type: tagTypes.tripBuddy as const,
+                id,
+              })),
+              tagTypes.tripBuddy,
+            ]
+          : [tagTypes.tripBuddy],
     }),
 
     getStatusForATripRequest: build.query({
@@ -56,6 +61,15 @@ export const travelBuddyApi = baseApi.injectEndpoints({
           data: data,
         };
       },
+      invalidatesTags: (result) =>
+        result
+          ? [
+              {
+                type: tagTypes.tripBuddy as const,
+                id: result.id,
+              },
+            ]
+          : [tagTypes.tripBuddy],
     }),
   }),
 });
