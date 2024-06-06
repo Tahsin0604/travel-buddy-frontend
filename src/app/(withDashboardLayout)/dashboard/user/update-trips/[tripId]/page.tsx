@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePickerField from "@/components/Forms/DatePickerField";
 import EditorField from "@/components/Forms/EditorField";
 import InputField from "@/components/Forms/InputField";
@@ -45,10 +45,15 @@ const UpdateTripsPage = ({
 
   const [updateTrip, { isLoading: createLoading }] = useUpdateTripMutation();
 
-  const [images, setImages] = useState<string[]>([...trip?.images]);
+  const [images, setImages] = useState<string[]>([]);
   const [itinerary, setItinerary] = useState<
     { startDay: number; endDay: number; nights: number; activities: string }[]
-  >([...trip?.itinerary]);
+  >([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
+
+  useEffect(() => {
+    setImages(trip?.images);
+    setItinerary(trip?.itinerary);
+  }, [trip]);
   const [error, setError] = useState("");
   const router = useRouter();
   const dateFormat = "YYYY-MM-DD";
