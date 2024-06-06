@@ -21,8 +21,9 @@ import {
   useUpdateTripMutation,
 } from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
-import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
+
 import Loading from "@/components/UI/Loading";
+import ItineraryItem from "./components/ItineraryItem";
 
 const updateTripValidation = z.object({
   destination: z.string(),

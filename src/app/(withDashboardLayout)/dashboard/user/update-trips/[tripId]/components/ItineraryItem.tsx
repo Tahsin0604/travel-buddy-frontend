@@ -45,28 +45,31 @@ const ItineraryItem = ({
 
   useEffect(() => {
     if (updateItinerary) {
-      const newItinerary = [...itinerary];
+      setItinerary((prevItinerary) => {
+        const newItinerary = [...prevItinerary];
 
-      newItinerary[index] = {
-        startDay: startDay,
-        endDay: startDay + nights,
-        nights,
-        activities,
-      };
+        newItinerary[index] = {
+          ...newItinerary[index],
+          startDay: startDay,
+          endDay: startDay + nights,
+          nights,
+          activities,
+        };
 
-      const tempItinerary = newItinerary.map((item, i) => {
-        if (i > index) {
-          const prevItem = newItinerary[i - 1];
-          console.log(prevItem);
+        const tempItinerary = newItinerary.map((item, i) => {
+          if (i > index) {
+            const prevItem = newItinerary[i - 1];
+            return {
+              ...item,
+              startDay: prevItem.endDay,
+              endDay: prevItem.endDay + item.nights,
+            };
+          }
+          return item;
+        });
 
-          item.startDay = prevItem.endDay;
-          item.endDay = item.startDay + item.nights;
-        }
-
-        return item;
+        return tempItinerary;
       });
-
-      setItinerary(tempItinerary);
     }
   }, [nights, activities]);
 
