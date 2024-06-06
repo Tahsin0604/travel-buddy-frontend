@@ -42,14 +42,7 @@ const MyTripsPage = () => {
     );
   }
   return (
-    <div className="custom-container">
-      <p className="text-6xl font-extrabold mt-10 mb-4 text-center">
-        Find Trips
-      </p>
-      <p className="text-xl font-bold  text-center  mb-8">
-        Discover your next big adventure
-      </p>
-      <Divider />
+    <div className="px-4 md:px-8 lg:px-16">
       <div className="flex gap-6  py-6">
         <div className="w-full space-y-5">
           <div className=" flex justify-between items-centers">
