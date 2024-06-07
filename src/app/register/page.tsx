@@ -85,13 +85,7 @@ const RegisterPage = () => {
           </p>
         </Link>
       </div>
-      {error && (
-        <div>
-          <p className="bg-red-500 py-[1px] px-8 md:px-16 lg:px-28 text-white text-center rounded mt-1">
-            {error}
-          </p>
-        </div>
-      )}
+
       <div className="grid grid-cols-12 justify-center items-center bg-slate-50 gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
         <div className="col-span-6 h-full overflow-hidden drop-shadow-md rounded-lg hidden md:block">
           <Image

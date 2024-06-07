@@ -6,7 +6,7 @@ export const tripsAPi = baseApi.injectEndpoints({
     getAllTrips: build.query({
       query: (args) => {
         return {
-          url: "/trips/",
+          url: "/trips",
           method: "GET",
           params: args,
         };
@@ -47,7 +47,7 @@ export const tripsAPi = baseApi.injectEndpoints({
     createTrip: build.mutation({
       query: (data) => {
         return {
-          url: "/trips/",
+          url: "/trips",
           method: "POST",
           data,
         };
