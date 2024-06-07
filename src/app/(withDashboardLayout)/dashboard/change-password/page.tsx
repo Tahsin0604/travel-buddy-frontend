@@ -2,8 +2,11 @@
 import PasswordField from "@/components/Forms/PasswordField";
 import ReusableForm from "@/components/Forms/ReusableForm";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,6 +31,7 @@ const changePasswordValidation = z
 
 const ChangePasswordPage = () => {
   const [error, setError] = useState("");
+  const router = useRouter();
   const [changePassword, { isLoading }] = useChangePasswordMutation();
   const handleSubmit = async (values: FieldValues) => {
     const { confirmPassword, ...payload } = values;
@@ -35,8 +39,10 @@ const ChangePasswordPage = () => {
     try {
       const res: Record<string, any> = await changePassword(payload);
       console.log(res);
-      if (res.data.id) {
+      if (res.data.status === 200) {
         setError("");
+        await logoutUser(router);
+        router.push("/login");
         toast.success("Password changed successfully");
       } else {
         setError(res?.error?.message);
