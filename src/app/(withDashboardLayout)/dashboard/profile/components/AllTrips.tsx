@@ -1,14 +1,13 @@
 "use client";
-import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import { TravelStatus } from "@/constants/trips";
 import { useGetAllTripRequestQuery } from "@/redux/api/travelBuddyApi";
+import { useGetAllMyTripsQuery } from "@/redux/api/tripsApi";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
 import { Avatar, List, Space } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 
 interface TTrip {
   tripHref: string;
@@ -23,48 +22,46 @@ interface TTrip {
   creatorName: string;
   creatorHref: string;
   avatar?: string;
-  status: string;
 }
 const AllTrips = () => {
-  const { data, isFetching } = useGetAllTripRequestQuery({
+  const { data, isLoading } = useGetAllMyTripsQuery({
     page: 1,
     limit: 6,
   });
-  console.log(data);
+
   const trips = data?.trips as Record<string, any>[];
-  const meta = data?.meta as Record<string, any>;
+
   const dataList: TTrip[] =
     trips?.map((trip, i) => ({
-      tripHref: `/trips/${trip?.tripId}`,
-      title: trip?.trip?.tripTitle,
-      tripImages: trip?.trip?.images,
-      budget: trip?.trip?.budget,
-      duration: trip?.trip?.itinerary[trip?.trip?.itinerary.length - 1].endDay,
-      destination: trip?.trip?.destination,
-      tripType: trip?.trip?.tripType,
-      startDate: dayjs(trip?.trip?.startDate, "YYYY-MM-DD")
+      tripHref: `/trips/${trip?.id}`,
+      title: trip?.tripTitle,
+      tripImages: trip?.images,
+      budget: trip?.budget,
+      duration: trip?.itinerary[trip?.itinerary.length - 1].endDay,
+      destination: trip?.destination,
+      tripType: trip?.tripType,
+      startDate: dayjs(trip?.startDate, "YYYY-MM-DD")
         .format("DD MMM YY")
         .toUpperCase(),
-      endDate: dayjs(trip?.trip?.endDate, "YYYY-MM-DD")
+      endDate: dayjs(trip?.endDate, "YYYY-MM-DD")
         .format("DD MMM YY")
         .toUpperCase(),
-      creatorName: trip?.trip?.user?.name,
-      creatorHref: `/profile/${trip?.trip?.userId}`,
-      avatar: trip?.trip?.user?.profile?.profilePhoto,
-      status: trip?.status,
+      creatorName: trip?.user?.name,
+      creatorHref: `/profile/${trip?.userId}`,
+      avatar: trip?.user?.profile?.profilePhoto,
     })) || [];
   return (
     <>
       <List
-        itemLayout="horizontal"
+        itemLayout="vertical"
         size="large"
-        loading={isFetching}
+        loading={isLoading}
         dataSource={dataList}
         renderItem={(item) => (
           <List.Item
             key={item.title}
             extra={
-              <div className="w-full h-40 rounded-md overflow-hidden">
+              <div className="w-40 h-40 rounded-md overflow-hidden">
                 <CustomSlider images={item?.tripImages} />
               </div>
             }
@@ -117,15 +114,6 @@ const AllTrips = () => {
                 {item?.endDate}
               </div>
               <p className="font-semibold mb-2">$ {item?.budget}</p>
-              {item?.status === TravelStatus.PENDING && (
-                <p className="font-semibold text-sky-300">Request pending</p>
-              )}
-              {item?.status === TravelStatus.APPROVED && (
-                <p className="font-semibold  text-lime-500">Request approved</p>
-              )}
-              {item?.status === TravelStatus.REJECTED && (
-                <p className="font-semibold  text-red-500">Request rejected</p>
-              )}
             </div>
           </List.Item>
         )}

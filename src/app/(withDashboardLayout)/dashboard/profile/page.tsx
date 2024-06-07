@@ -13,6 +13,7 @@ import CloudinaryUpload from "@/components/Cloudinary/CloudinaryUpload";
 import dayjs from "dayjs";
 import { getUserInfo } from "@/services/auth.services";
 import AllTripRequest from "./components/AllTripRequest";
+import AllTrips from "./components/AllTrips";
 
 const ProfilePage = () => {
   const [resource, setResource] = useState<any>("");
@@ -131,7 +132,7 @@ const ProfilePage = () => {
             <p className="text-slate-700 font-semibold text-lg text-center">
               Trip Request History
             </p>
-            <div>
+            <div className="rounded-md bg-white py-1">
               <AllTripRequest />
             </div>
             <div className="flex justify-end">
@@ -148,8 +149,8 @@ const ProfilePage = () => {
             <p className="text-slate-700 font-semibold text-lg text-center">
               Trip Post
             </p>
-            <div>
-              <AllTripRequest />
+            <div className="rounded-md bg-white py-1">
+              <AllTrips />
             </div>
             <div className="flex justify-end">
               <Button
