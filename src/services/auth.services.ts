@@ -38,7 +38,7 @@ export const removeUser = () => {
 
 export const getNewAccessToken = async () => {
   return await axiosInstance({
-    url: `${process.env.NEXT_PUBLIC_API_URL as string}/auth/refresh-token`,
+    url: "https://travel-buddy-ecru.vercel.app/api/auth/refresh-token",
     method: "POST",
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
