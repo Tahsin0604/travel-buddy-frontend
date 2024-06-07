@@ -31,7 +31,7 @@ const MyTripRequestPage = () => {
     page: page,
     limit: 6,
   });
-  console.log(data);
+
   const trips = data?.trips as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;
   const dataList: TTrip[] =

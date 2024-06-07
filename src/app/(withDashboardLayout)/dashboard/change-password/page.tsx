@@ -38,7 +38,7 @@ const ChangePasswordPage = () => {
 
     try {
       const res: Record<string, any> = await changePassword(payload);
-      console.log(res);
+
       if (res.data.status === 200) {
         setError("");
         await logoutUser(router);

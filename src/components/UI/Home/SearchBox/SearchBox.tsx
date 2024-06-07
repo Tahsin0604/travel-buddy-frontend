@@ -17,7 +17,7 @@ const SearchBox = () => {
     let searchString = "";
     for (const field in data) {
       if (data[field]) {
-        console.log(data[field]);
+        
         searchString += `${field}=${data[field]}&`;
       }
     }

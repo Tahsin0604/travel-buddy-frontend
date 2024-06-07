@@ -36,11 +36,9 @@ const LoginPage = () => {
         await storeUserInfo(loginRes?.data?.accessToken);
 
         if (loginRes.data?.needPasswordChange) {
-          console.log("need password");
           router.push("/dashboard/change-password");
         }
         if (!loginRes.data?.needPasswordChange) {
-          console.log("profile");
           router.push("/dashboard/profile");
         }
       } else {

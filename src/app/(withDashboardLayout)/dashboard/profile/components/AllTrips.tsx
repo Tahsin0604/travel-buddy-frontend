@@ -1,10 +1,8 @@
 "use client";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
-import { TravelStatus } from "@/constants/trips";
-import { useGetAllTripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetAllMyTripsQuery } from "@/redux/api/tripsApi";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Empty, List, Space } from "antd";
+import { Avatar, Button, Empty, List } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";

@@ -102,7 +102,7 @@ const CreateTripsPage = () => {
       values.itinerary = itinerary;
       try {
         const res: Record<string, any> = await createTrip(values);
-        console.log(res);
+
         if (res?.data?.id) {
           setItinerary([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
           setImages([]);

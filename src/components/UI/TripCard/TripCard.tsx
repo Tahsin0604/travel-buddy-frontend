@@ -22,7 +22,6 @@ const TripCard = ({
   const onDelete = async () => {
     const res = await deleteTrip(trip?.id);
 
-    console.log(res);
     if (res.data.id) {
       toast.success(res?.data?.message);
       router.push("/dashboard/user/my-trips");

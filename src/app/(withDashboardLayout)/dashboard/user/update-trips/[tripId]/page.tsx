@@ -53,14 +53,12 @@ const UpdateTripsPage = ({
 
   useEffect(() => {
     if (trip) {
-      console.log("Trip data:", trip);
       setImages([...trip.images]);
       const temp = [...trip.itinerary];
-      console.log(temp);
       setItinerary([...temp]);
     }
   }, [trip]);
-  console.log(itinerary);
+
   const [error, setError] = useState("");
   const router = useRouter();
   const dateFormat = "YYYY-MM-DD";
@@ -128,7 +126,7 @@ const UpdateTripsPage = ({
           id: tripId,
           data: values,
         });
-        console.log(res);
+
         if (res?.data?.id) {
           setError("");
           toast.success("Trips updated successfully");
