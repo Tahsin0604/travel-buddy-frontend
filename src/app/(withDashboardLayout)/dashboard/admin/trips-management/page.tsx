@@ -123,7 +123,7 @@ const TripsManagementPage = () => {
                 }`}
               >
                 {" "}
-                Deleted: {item?.isDeleted}
+                Deleted: {item?.isDeleted ? "True" : "False"}
               </p>
             </div>
           </List.Item>
