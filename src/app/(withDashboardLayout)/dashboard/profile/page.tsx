@@ -125,17 +125,44 @@ const ProfilePage = () => {
           </div>
         </Col>
       </Row>
-      <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-12 lg:col-span-6 space-y-7">
-          <p className="text-slate-700 font-semibold text-lg text-center">
-            Trip Request History
-          </p>
-          <AllTripRequest />
-          <Button size="large" href="/dashboard/user/my-trip-request">
-            Show More
-          </Button>
+      {role === "USER" && (
+        <div className="grid grid-cols-12 gap-6 my-8">
+          <div className="col-span-12 lg:col-span-6 space-y-7 p-4 bg-slate-50 rounded-md">
+            <p className="text-slate-700 font-semibold text-lg text-center">
+              Trip Request History
+            </p>
+            <div>
+              <AllTripRequest />
+            </div>
+            <div className="flex justify-end">
+              <Button
+                type="link"
+                size="large"
+                href="/dashboard/user/my-trip-request"
+              >
+                Show More
+              </Button>
+            </div>
+          </div>
+          <div className="col-span-12 lg:col-span-6 space-y-7 p-4 bg-slate-50 rounded-md">
+            <p className="text-slate-700 font-semibold text-lg text-center">
+              Trip Post
+            </p>
+            <div>
+              <AllTripRequest />
+            </div>
+            <div className="flex justify-end">
+              <Button
+                type="link"
+                size="large"
+                href="/dashboard/user/my-trip-request"
+              >
+                Show More
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
