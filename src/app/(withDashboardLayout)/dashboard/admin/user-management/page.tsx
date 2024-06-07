@@ -1,3 +1,4 @@
+"use client";
 import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
 import { useGetAllUsersQuery } from "@/redux/api/adminApi";
 import { UserOutlined } from "@ant-design/icons";
