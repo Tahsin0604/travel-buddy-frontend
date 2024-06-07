@@ -65,7 +65,7 @@ const MyTripRequestPage = () => {
           <List.Item
             key={item.title}
             extra={
-              <div className="w-64 h-64 rounded-md overflow-hidden">
+              <div className="w-48 h-48 rounded-md overflow-hidden">
                 <CustomSlider images={item?.tripImages} />
               </div>
             }
