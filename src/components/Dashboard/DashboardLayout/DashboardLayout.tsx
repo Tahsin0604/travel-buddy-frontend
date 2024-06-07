@@ -5,6 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import DrawerItems from "../DrawerItems/DrawerItems";
 import { MenuOutlined } from "@ant-design/icons";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 const AuthButton = dynamic(
   () => import("../../Reusable/AuthComponent/AuthComponent"),
   { ssr: false }
@@ -33,6 +34,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           }}
         >
           <div className="flex justify-end items-center gap-4">
+            <Link
+              href="/trips"
+              className={`font-bold hover:text-sky-300  transition-all ease-in-out delay-150 text-slate-700`}
+            >
+              Trips
+            </Link>
             <AuthButton />
             <button onClick={() => setVisible(true)} className="lg:hidden">
               <MenuOutlined />

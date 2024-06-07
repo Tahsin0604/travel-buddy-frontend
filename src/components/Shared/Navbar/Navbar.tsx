@@ -26,12 +26,20 @@ const Navbar = () => {
         Home
       </Link>
       <Link
-        href="/"
+        href="/about-us"
         className={`font-bold hover:text-sky-300  transition-all ease-in-out delay-150 ${
           pathname === "/about-us" ? "text-sky-400" : "text-slate-700"
         }`}
       >
         About Us
+      </Link>
+      <Link
+        href="/trips"
+        className={`font-bold hover:text-sky-300  transition-all ease-in-out delay-150 ${
+          pathname === "/trips" ? "text-sky-400" : "text-slate-700"
+        }`}
+      >
+        Trips
       </Link>
       <AuthButton />
     </>
