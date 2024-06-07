@@ -1,4 +1,5 @@
 "use client";
+import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import { useGetAllTripsQuery } from "@/redux/api/adminApi";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
@@ -6,6 +7,7 @@ import { Avatar, Empty, List } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 interface TTrip {
   tripHref: string;
@@ -23,13 +25,14 @@ interface TTrip {
   avatar?: string;
 }
 const TripsManagementPage = () => {
+  const [page, setPage] = useState(1);
   const { data, isLoading } = useGetAllTripsQuery({
-    page: 1,
+    page: page,
     limit: 8,
   });
 
   const trips = data?.trips as Record<string, any>[];
-
+  const meta = data?.meta as Record<string, any>;
   const dataList: TTrip[] =
     trips?.map((trip, i) => ({
       tripHref: `/trips/${trip?.id}`,
@@ -51,7 +54,7 @@ const TripsManagementPage = () => {
       avatar: trip?.user?.profile?.profilePhoto,
     })) || [];
   return (
-    <>
+    <div>
       <List
         itemLayout="vertical"
         size="large"
@@ -129,7 +132,17 @@ const TripsManagementPage = () => {
           emptyText: <Empty description="No post created yet"></Empty>,
         }}
       />
-    </>
+      <div className="flex justify-center item-center pt-6">
+        {trips?.length > 0 && (
+          <PaginationComponent
+            total={meta?.total}
+            current={meta?.page}
+            limit={meta?.limit}
+            setPage={setPage}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 

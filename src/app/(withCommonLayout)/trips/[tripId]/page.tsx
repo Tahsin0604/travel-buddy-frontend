@@ -40,6 +40,9 @@ const TripDetailsPage = ({
     if (tripStatus?.status) {
       status = false;
     }
+    if (userData?.role === "ADMIN") {
+      status = false;
+    }
     setShowRequestButton(status);
   }, [trip, tripStatus]);
 
