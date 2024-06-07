@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useGetAllTripsQuery } from "@/redux/api/tripsApi";
 import { ReactNode, useEffect, useState } from "react";
@@ -38,6 +39,7 @@ const TripsPage = ({
     limit: 12,
     startDate: startDate,
   });
+
   useEffect(() => {
     const query = { ...searchQuery };
     if (!!debouncedTerms) {

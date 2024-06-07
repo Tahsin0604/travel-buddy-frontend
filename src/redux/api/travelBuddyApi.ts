@@ -42,6 +42,22 @@ export const travelBuddyApi = baseApi.injectEndpoints({
           : [tagTypes.tripBuddy],
     }),
 
+    getAllTripRequest: build.query({
+      query: (args) => {
+        return {
+          url: `/travel-buddies/request`,
+          method: "GET",
+          params: args,
+        };
+      },
+      transformResponse: (data: Record<string, any>[], meta) => {
+        return {
+          trips: data,
+          meta: meta,
+        };
+      },
+      providesTags: [tagTypes.myTripRequest],
+    }),
     getStatusForATripRequest: build.query({
       query: (tripId) => {
         return {
@@ -68,6 +84,7 @@ export const travelBuddyApi = baseApi.injectEndpoints({
 export const {
   useSendBuddyRequestMutation,
   useGetAllBuddyForATripsQuery,
+  useGetAllTripRequestQuery,
   useGetStatusForATripRequestQuery,
   useSendTripResponseMutation,
 } = travelBuddyApi;

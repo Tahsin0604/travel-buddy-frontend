@@ -14,6 +14,7 @@ import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import BuddyList from "./component/BuddyList";
+import Link from "next/link";
 
 const TripDetailsPage = ({
   params: { tripId },
@@ -94,7 +95,12 @@ const TripDetailsPage = ({
                   className="h-full w-full"
                 />
               </div>
-              <p className="text-slate-800 font-semibold">{trip?.user?.name}</p>
+              <Link
+                href={`/profile/${trip?.userId}`}
+                className=" text-slate-800 font-semibold "
+              >
+                {trip?.user?.name}
+              </Link>
             </div>
             <div className="flex items-center gap-5 py-5">
               <div className="flex items-center gap-3">
