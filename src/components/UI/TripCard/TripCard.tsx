@@ -74,7 +74,7 @@ const TripCard = ({
             </p>
             <p className="text-slate-800 text-lg py-3 font-bold hover:text-sky-700 transition-colors ease-in-out duration-150">
               {trip?.tripTitle.length > 40
-                ? trip?.tripTitle.slice(40).concat("...")
+                ? trip?.tripTitle.slice(0, 40).concat("...")
                 : trip?.tripTitle}
             </p>
             <p className="text-slate-600 pb-2 font-semibold">
