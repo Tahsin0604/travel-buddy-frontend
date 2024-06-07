@@ -21,14 +21,16 @@ import { useRouter } from "next/navigation";
 import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
 
 const createTripValidation = z.object({
-  destination: z.string(),
+  destination: z.string({ required_error: "destination is required" }),
   tripType: z.enum([...TripTypeConstant.map((trip) => trip.value)] as [
     string,
     ...string[]
   ]),
-  tripTitle: z.string(),
+  tripTitle: z.string({ required_error: "destination is required" }),
   description: z.string().optional(),
-  startDate: z.string(),
+  startDate: z.string().refine((val) => val === "", {
+    message: "destination is required",
+  }),
   budget: z.number(),
 });
 
@@ -100,6 +102,7 @@ const CreateTripsPage = () => {
         .format("YYYY-MM-DD");
 
       values.itinerary = itinerary;
+      console.log(values);
       try {
         const res: Record<string, any> = await createTrip(values);
 
