@@ -6,12 +6,14 @@ import { TravelStatus } from "@/constants/trips";
 import { useGetStatusForATripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
 import { getUserInfo, isLoggedIn } from "@/services/auth.services";
-import { CalendarFilled, CalendarOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import {
+  CalendarFilled,
+  CalendarOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
-import Image from "next/image";
-
 import { useEffect, useState } from "react";
 import BuddyList from "./component/BuddyList";
 import Link from "next/link";
@@ -90,14 +92,13 @@ const TripDetailsPage = ({
             </h1>
             <div className="flex items-center gap-2 py-5">
               <p className="text-slate-500 font-light italic">Hosted by</p>
-              <div className="h-10 w-10 rounded-full overflow-hidden relative">
-                <Image
-                  src={trip?.user?.profile?.profilePhoto}
-                  alt="user pic"
-                  fill={true}
-                  className="h-full w-full"
-                />
-              </div>
+
+              {trip?.user?.profile?.profilePhoto ? (
+                <Avatar src={trip?.user?.profile?.profilePhoto} />
+              ) : (
+                <Avatar icon={<UserOutlined />} />
+              )}
+
               <Link
                 href={`/profile/${trip?.userId}`}
                 className=" text-slate-800 font-semibold "
