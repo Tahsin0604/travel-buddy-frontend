@@ -88,7 +88,7 @@ const AllTripRequest = () => {
                   ? item?.title.slice(40).concat("...")
                   : item?.title}
               </Link>
-              <div className="flex items-center gap-4 py-2">
+              <div className="flex flex-col md:flex-row items-center gap-4 py-2">
                 <div className="flex items-center gap-2">
                   <Clock fill="#367fdd" color="white" />
                   <p className="text-slate-600 font-semibold ">
