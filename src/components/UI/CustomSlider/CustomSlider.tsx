@@ -29,7 +29,7 @@ export default function CustomSlider({ images }: { images: string[] }) {
             />
           </SwiperSlide>
         ))}
-        <SliderNavigation></SliderNavigation>
+        {images.length > 1 && <SliderNavigation></SliderNavigation>}
       </Swiper>
     </>
   );

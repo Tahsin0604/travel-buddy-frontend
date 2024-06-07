@@ -10,41 +10,62 @@ import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
+interface TTrip {
+  tripHref: string;
+  title: string;
+  tripImages: string[];
+  budget: number;
+  duration: number;
+  destination: string;
+  tripType: string;
+  startDate: string;
+  endDate: string;
+  creatorName: string;
+  creatorHref: string;
+  avatar?: string;
+  status: string;
+}
 const MyTripRequestPage = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useGetAllTripRequestQuery({ page: page });
+  const { data, isFetching } = useGetAllTripRequestQuery({
+    page: page,
+    limit: 6,
+  });
+  console.log(data);
   const trips = data?.trips as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;
-  const dataList = trips.map((trip, i) => ({
-    tripHref: `/trips/${trip?.tripId}`,
-    title: trip?.trip?.tripTitle,
-    tripImages: trip?.trip?.images,
-    budget: trip?.trip?.budget,
-    duration: trip?.trip?.itinerary[trip?.itinerary.length - 1].endDay,
-    destination: trip?.trip?.destination,
-    tripType: trip?.trip?.tripType,
-    startDate: dayjs(trip?.trip?.startDate, "YYYY-MM-DD")
-      .format("DD MMM YY")
-      .toUpperCase(),
-    endDate: dayjs(trip?.trip?.endDate, "YYYY-MM-DD")
-      .format("DD MMM YY")
-      .toUpperCase(),
-    creatorName: trip?.trip?.user?.name,
-    creatorHref: `/profile/${trip?.trip?.userId}`,
-    avatar: trip?.trip?.user?.profile?.profilePhoto,
-    status: trip?.status,
-  }));
+  const dataList: TTrip[] =
+    trips?.map((trip, i) => ({
+      tripHref: `/trips/${trip?.tripId}`,
+      title: trip?.trip?.tripTitle,
+      tripImages: trip?.trip?.images,
+      budget: trip?.trip?.budget,
+      duration: trip?.trip?.itinerary[trip?.trip?.itinerary.length - 1].endDay,
+      destination: trip?.trip?.destination,
+      tripType: trip?.trip?.tripType,
+      startDate: dayjs(trip?.trip?.startDate, "YYYY-MM-DD")
+        .format("DD MMM YY")
+        .toUpperCase(),
+      endDate: dayjs(trip?.trip?.endDate, "YYYY-MM-DD")
+        .format("DD MMM YY")
+        .toUpperCase(),
+      creatorName: trip?.trip?.user?.name,
+      creatorHref: `/profile/${trip?.trip?.userId}`,
+      avatar: trip?.trip?.user?.profile?.profilePhoto,
+      status: trip?.status,
+    })) || [];
   return (
     <div className="px-4 md:px-8 lg:px-16">
       <List
         itemLayout="vertical"
         size="large"
+        loading={isFetching}
         dataSource={dataList}
         renderItem={(item) => (
           <List.Item
             key={item.title}
             extra={
-              <div className="h-full w-[272px]">
+              <div className="w-64 h-64 rounded-md overflow-hidden">
                 <CustomSlider images={item?.tripImages} />
               </div>
             }
