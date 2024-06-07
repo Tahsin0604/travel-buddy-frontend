@@ -39,7 +39,7 @@ const CreateAdminPage = () => {
   };
   return (
     <div className="flex justify-center   px-8 md:px-16 lg:px-28">
-      <div className="w-full md:w-3/4 lg:w-1/2 px-10 py-6 rounded-lg bg-white drop-shadow-md">
+      <div className="w-full md:w-3/4 lg:w-1/2 px-10 py-6 ">
         <h1 className="mb-6 text-3xl text-center font-bold text-slate-800">
           Create new Admin !!
         </h1>
