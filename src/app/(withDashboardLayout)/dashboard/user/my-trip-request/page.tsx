@@ -1,3 +1,4 @@
+"use client";
 import PaginationComponent from "@/components/Reusable/PaginationComponent/PaginationComponent";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import { TravelStatus } from "@/constants/trips";
