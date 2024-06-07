@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useDebounced } from "@/redux/hook"; // Adjust the import path if necessary
 import { Button, InputNumber } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState, useEffect } from "react";
@@ -36,6 +37,12 @@ const ItineraryItem = ({
   );
   const startDay = itinerary[index]?.startDay;
 
+  // Use the custom hook to debounce the activities input
+  const debouncedActivities = useDebounced({
+    searchQuery: activities,
+    delay: 300,
+  });
+
   useEffect(() => {
     setNights(itinerary[index]?.nights);
     setActivities(itinerary[index]?.activities);
@@ -50,7 +57,7 @@ const ItineraryItem = ({
         startDay: startDay,
         endDay: startDay + nights,
         nights,
-        activities,
+        activities: debouncedActivities,
       };
 
       const tempItinerary = newItinerary.map((item, i) => {
@@ -67,7 +74,7 @@ const ItineraryItem = ({
 
       return tempItinerary;
     });
-  }, [nights, activities]);
+  }, [nights, debouncedActivities]);
 
   const endDay = nights > 0 ? startDay + nights : startDay;
 
@@ -83,12 +90,7 @@ const ItineraryItem = ({
             <Button size="large" onClick={() => setNights(nights - 1)}>
               -
             </Button>
-            <InputNumber
-              min={0}
-              value={itinerary[index]?.nights}
-              size="large"
-              disabled={true}
-            />
+            <InputNumber min={0} value={nights} size="large" disabled={true} />
             <Button size="large" onClick={() => setNights(nights + 1)}>
               +
             </Button>
@@ -97,7 +99,7 @@ const ItineraryItem = ({
       </div>
 
       <TextArea
-        value={itinerary[index]?.activities}
+        value={activities}
         placeholder="write activities"
         required
         onChange={(e) => setActivities(e.target.value)}
