@@ -22,7 +22,6 @@ type TProps = {
       }[]
     >
   >;
-  updateItinerary?: boolean;
 };
 
 const ItineraryItem = ({
@@ -30,7 +29,6 @@ const ItineraryItem = ({
   removeItem,
   itinerary,
   setItinerary,
-  updateItinerary = true,
 }: TProps) => {
   const [nights, setNights] = useState<number>(itinerary[index]?.nights);
   const [activities, setActivities] = useState<string>(
@@ -44,33 +42,31 @@ const ItineraryItem = ({
   }, [itinerary]);
 
   useEffect(() => {
-    if (updateItinerary) {
-      setItinerary((prevItinerary) => {
-        const newItinerary = [...prevItinerary];
+    setItinerary((prevItinerary) => {
+      const newItinerary = [...prevItinerary];
 
-        newItinerary[index] = {
-          ...newItinerary[index],
-          startDay: startDay,
-          endDay: startDay + nights,
-          nights,
-          activities,
-        };
+      newItinerary[index] = {
+        ...newItinerary[index],
+        startDay: startDay,
+        endDay: startDay + nights,
+        nights,
+        activities,
+      };
 
-        const tempItinerary = newItinerary.map((item, i) => {
-          if (i > index) {
-            const prevItem = newItinerary[i - 1];
-            return {
-              ...item,
-              startDay: prevItem.endDay,
-              endDay: prevItem.endDay + item.nights,
-            };
-          }
-          return item;
-        });
-
-        return tempItinerary;
+      const tempItinerary = newItinerary.map((item, i) => {
+        if (i > index) {
+          const prevItem = newItinerary[i - 1];
+          return {
+            ...item,
+            startDay: prevItem.endDay,
+            endDay: prevItem.endDay + item.nights,
+          };
+        }
+        return item;
       });
-    }
+
+      return tempItinerary;
+    });
   }, [nights, activities]);
 
   const endDay = nights > 0 ? startDay + nights : startDay;
@@ -84,11 +80,7 @@ const ItineraryItem = ({
         <div>
           <p className="text-center">Nights</p>
           <div className="flex items-center  gap-4">
-            <Button
-              size="large"
-              disabled={!updateItinerary}
-              onClick={() => setNights(nights - 1)}
-            >
+            <Button size="large" onClick={() => setNights(nights - 1)}>
               -
             </Button>
             <InputNumber
@@ -97,11 +89,7 @@ const ItineraryItem = ({
               size="large"
               disabled={true}
             />
-            <Button
-              size="large"
-              disabled={!updateItinerary}
-              onClick={() => setNights(nights + 1)}
-            >
+            <Button size="large" onClick={() => setNights(nights + 1)}>
               +
             </Button>
           </div>
@@ -109,7 +97,6 @@ const ItineraryItem = ({
       </div>
 
       <TextArea
-        disabled={!updateItinerary}
         value={itinerary[index]?.activities}
         placeholder="write activities"
         required
@@ -117,12 +104,7 @@ const ItineraryItem = ({
       />
       {itinerary.length > 1 && (
         <div className="flex justify-end">
-          <Button
-            disabled={!updateItinerary}
-            type="primary"
-            danger
-            onClick={() => removeItem(index)}
-          >
+          <Button type="primary" danger onClick={() => removeItem(index)}>
             Remove
           </Button>
         </div>

@@ -4,7 +4,6 @@ import TripCard from "@/components/UI/TripCard/TripCard";
 import TripCardSkeleton from "@/components/UI/TripCard/TripCardSkeleton";
 import { useGetAllMyTripsQuery } from "@/redux/api/tripsApi";
 import { getUserInfo } from "@/services/auth.services";
-import { Divider } from "antd";
 import { ReactNode, useState } from "react";
 
 const MyTripsPage = () => {

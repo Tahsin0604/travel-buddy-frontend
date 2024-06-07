@@ -18,7 +18,7 @@ import ImageUploadModal from "@/components/Forms/ImageUploadModal";
 import { toast } from "sonner";
 import { useCreateTripMutation } from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
-import ItineraryItem from "./components/ItineraryItem";
+import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
 
 const createTripValidation = z.object({
   destination: z.string(),

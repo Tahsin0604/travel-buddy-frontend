@@ -21,9 +21,8 @@ import {
   useUpdateTripMutation,
 } from "@/redux/api/tripsApi";
 import { useRouter } from "next/navigation";
-
 import Loading from "@/components/UI/Loading";
-import ItineraryItem from "./components/ItineraryItem";
+import ItineraryItem from "@/components/Reusable/ItineraryItem/ItineraryItem";
 
 const updateTripValidation = z.object({
   destination: z.string(),
@@ -48,7 +47,6 @@ const UpdateTripsPage = ({
   const [updateTrip, { isLoading: createLoading }] = useUpdateTripMutation();
 
   const [images, setImages] = useState<string[]>([]);
-  const [updateItinerary, setUpdateItinerary] = useState<boolean>(false);
   const [itinerary, setItinerary] = useState<
     { startDay: number; endDay: number; nights: number; activities: string }[]
   >([{ startDay: 1, endDay: 1, nights: 0, activities: "" }]);
@@ -201,19 +199,7 @@ const UpdateTripsPage = ({
         <NumberField name="budget" label="Budget" />
 
         <div className="mb-4">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-xl font-semibold">Itinerary</h3>
-            <Button
-              type="primary"
-              size="small"
-              onClick={() => {
-                setUpdateItinerary(true);
-                addItineraryItem();
-              }}
-            >
-              Update Itinerary
-            </Button>
-          </div>
+          <h3 className="text-xl font-semibold">Itinerary</h3>
           {itinerary.map((_, index) => (
             <ItineraryItem
               key={index}
@@ -221,15 +207,9 @@ const UpdateTripsPage = ({
               itinerary={itinerary}
               setItinerary={setItinerary}
               removeItem={removeItineraryItem}
-              updateItinerary={updateItinerary}
             />
           ))}
-          <Button
-            type="dashed"
-            className="mt-3"
-            onClick={addItineraryItem}
-            disabled={!updateItinerary}
-          >
+          <Button type="dashed" className="mt-3" onClick={addItineraryItem}>
             Add Itinerary Item
           </Button>
         </div>
