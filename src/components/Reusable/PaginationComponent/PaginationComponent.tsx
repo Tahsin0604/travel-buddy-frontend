@@ -1,3 +1,4 @@
+"use client";
 import { Pagination, PaginationProps } from "antd";
 import React from "react";
 type TProps = {
@@ -9,6 +10,7 @@ type TProps = {
 
 const PaginationComponent = ({ current, total, limit, setPage }: TProps) => {
   const totalPage = Math.ceil(total / limit);
+  console.log(totalPage);
   const onChange: PaginationProps["onChange"] = (pageNumber) => {
     setPage(pageNumber);
   };
