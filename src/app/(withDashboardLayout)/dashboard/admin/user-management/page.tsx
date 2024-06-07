@@ -18,7 +18,7 @@ const UserManagementPage = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useGetAllUsersQuery({
     page: page,
-    limit: 2,
+    limit: 12,
   });
   const users = data?.users as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;

@@ -1,7 +1,11 @@
-import React from "react";
+import Banner from "@/components/UI/AboutUs/Banner/Banner";
 
-const page = () => {
-  return <div></div>;
+const AboutUsPage = () => {
+  return (
+    <div>
+      <Banner />
+    </div>
+  );
 };
 
-export default page;
+export default AboutUsPage;

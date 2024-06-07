@@ -3,6 +3,7 @@ const assets = {
     register: require("./register.jpg"),
     login: require("./login.jpg"),
     upload: require("./upload.jpg"),
+    aboutUs: require("./aboutUs.jpg"),
   },
   svgs: {},
 };
