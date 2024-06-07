@@ -34,14 +34,6 @@ const createTripValidation = z.object({
   budget: z.number(),
 });
 
-const defaultValue = {
-  destination: "",
-  tripType: {},
-  tripTitle: "",
-  description: "",
-  startDate: "",
-  budget: 0,
-};
 const CreateTripsPage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [itinerary, setItinerary] = useState<
@@ -145,7 +137,6 @@ const CreateTripsPage = () => {
       </div>
 
       <ReusableForm
-        defaultValues={defaultValue}
         onSubmit={handleSubmit}
         resolver={zodResolver(createTripValidation)}
       >
