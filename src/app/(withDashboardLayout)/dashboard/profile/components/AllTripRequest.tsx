@@ -3,7 +3,7 @@ import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import { TravelStatus } from "@/constants/trips";
 import { useGetAllTripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
-import { Avatar, List, Space } from "antd";
+import { Avatar, Button, Empty, List, Space } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -127,6 +127,15 @@ const AllTripRequest = () => {
             </div>
           </List.Item>
         )}
+        locale={{
+          emptyText: (
+            <Empty description="No request send yet">
+              <Button type="primary" href="/trips">
+                Search now
+              </Button>
+            </Empty>
+          ),
+        }}
       />
     </>
   );

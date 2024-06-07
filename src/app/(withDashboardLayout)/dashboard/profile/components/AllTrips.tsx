@@ -4,7 +4,7 @@ import { TravelStatus } from "@/constants/trips";
 import { useGetAllTripRequestQuery } from "@/redux/api/travelBuddyApi";
 import { useGetAllMyTripsQuery } from "@/redux/api/tripsApi";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
-import { Avatar, List, Space } from "antd";
+import { Avatar, Button, Empty, List, Space } from "antd";
 import dayjs from "dayjs";
 import { ArrowRight, Clock, Earth, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -117,6 +117,15 @@ const AllTrips = () => {
             </div>
           </List.Item>
         )}
+        locale={{
+          emptyText: (
+            <Empty description="No post created yet">
+              <Button type="primary" href="/dashboard/user/create-trips">
+                Create Now
+              </Button>
+            </Empty>
+          ),
+        }}
       />
     </>
   );
