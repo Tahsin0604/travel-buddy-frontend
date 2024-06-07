@@ -131,7 +131,7 @@ const UpdateTripsPage = ({
         console.log(res);
         if (res?.data?.id) {
           setError("");
-          toast.success("Trips added successfully");
+          toast.success("Trips updated successfully");
           router.push(`/trips/${tripId}`);
         } else {
           setError(res?.error?.message);
