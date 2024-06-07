@@ -19,6 +19,7 @@ const ProfilePage = ({
 
   const { data: profile, isLoading: profileLoading } =
     useGetUserProfileQuery(userId);
+
   const { data, isLoading: userTripLoading } = useGetAllMyTripsQuery({
     userId: userId,
     args: { page: page },

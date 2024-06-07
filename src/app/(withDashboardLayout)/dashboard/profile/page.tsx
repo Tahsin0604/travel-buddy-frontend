@@ -11,13 +11,16 @@ import { useEffect, useState } from "react";
 import UpdateProfile from "./components/UpdateProfile";
 import CloudinaryUpload from "@/components/Cloudinary/CloudinaryUpload";
 import dayjs from "dayjs";
+import { getUserInfo } from "@/services/auth.services";
+import AllTripRequest from "./components/AllTripRequest";
 
 const ProfilePage = () => {
   const [resource, setResource] = useState<any>("");
   const [imageSrc, setImageSrc] = useState(null);
   const [openDrawer, setOpenDrawer] = useState(false);
   const { data: profile, isLoading } = useGetMYProfileQuery({});
-
+  const userData = getUserInfo();
+  const role = userData?.role;
   const [updateMYProfile, { isLoading: updateLoading }] =
     useUpdateMYProfileMutation();
   useEffect(() => {
@@ -122,7 +125,17 @@ const ProfilePage = () => {
           </div>
         </Col>
       </Row>
-      <div></div>
+      <div className="grid grid-cols-12 gap-6">
+        <div className="col-span-12 lg:col-span-6 space-y-7">
+          <p className="text-slate-700 font-semibold text-lg text-center">
+            Trip Request History
+          </p>
+          <AllTripRequest />
+          <Button size="large" href="/dashboard/user/my-trip-request">
+            Show More
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
