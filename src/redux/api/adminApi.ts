@@ -30,7 +30,7 @@ export const adminApi = baseApi.injectEndpoints({
       },
       transformResponse: (data, meta) => {
         return {
-          trips: data,
+          users: data,
           meta: meta,
         };
       },
