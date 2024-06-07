@@ -5,6 +5,7 @@ const assets = {
     upload: require("./upload.jpg"),
     aboutUs: require("./aboutUs.jpg"),
     vision: require("./vision.jpg"),
+    joinUs: require("./joinUs.jpg"),
   },
   svgs: {},
 };

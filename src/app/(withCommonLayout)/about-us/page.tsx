@@ -1,15 +1,16 @@
 import Banner from "@/components/UI/AboutUs/Banner/Banner";
+import JoinUs from "@/components/UI/AboutUs/JoinUs/JoinUs";
 import Vision from "@/components/UI/AboutUs/Vision/Vision";
 
 const AboutUsPage = () => {
   return (
     <div>
       <Banner />
-      <div className="custom-container py-16">
-        <p className="text-2xl md:text-6xl font-extrabold text-slate-700 mb-6">
+      <div className="custom-container py-16 text-center">
+        <p className="text-2xl md:text-4xl font-extrabold text-slate-700 mb-6">
           Solo Paths, United Adventure!
         </p>
-        <p className="text-center text-slate-600">
+        <p className=" text-slate-600">
           At Trip Buddy, we bring together explorers from all over the world
           through our distinctive group adventures.<br></br>
           Our mission is to provide everyone with the chance to discover
@@ -24,6 +25,7 @@ const AboutUsPage = () => {
         </p>
       </div>
       <Vision />
+      <JoinUs />
     </div>
   );
 };
