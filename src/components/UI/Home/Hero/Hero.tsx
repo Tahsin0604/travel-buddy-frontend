@@ -20,10 +20,10 @@ const Hero = () => {
           Share your adventures with a travel companion.
         </p>
         <Link
-          href="/trips"
+          href="/dashboard/user/create-trips"
           className="text-lg  border-2 border-[#4096FF] px-5 py-2 bg-white rounded-md mt-6 text-[#4096FF] hover:scale-105 transition-transform duration-150"
         >
-          Explore More
+          CREATE A TRIP
         </Link>
       </div>
     </section>
