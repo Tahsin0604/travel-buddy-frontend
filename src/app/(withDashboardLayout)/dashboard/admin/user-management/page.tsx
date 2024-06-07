@@ -63,8 +63,7 @@ const UserManagementPage = () => {
                   item?.status === "BLOCKED" ? "text-red-400" : "text-green-400"
                 }`}
               >
-                {" "}
-                {item?.status === "BLOCKED" ? "True" : "False"}
+                {item?.status}
               </p>
             </div>
           </List.Item>

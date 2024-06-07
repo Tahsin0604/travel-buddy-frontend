@@ -18,7 +18,8 @@ const PaginationComponent = ({ current, total, limit, setPage }: TProps) => {
     <Pagination
       showQuickJumper
       current={current}
-      total={totalPage}
+      pageSize={limit}
+      total={total}
       onChange={onChange}
     />
   );
