@@ -54,7 +54,7 @@ const AllTripRequest = () => {
   return (
     <>
       <List
-        itemLayout="horizontal"
+        itemLayout="vertical"
         size="large"
         loading={isFetching}
         dataSource={dataList}
