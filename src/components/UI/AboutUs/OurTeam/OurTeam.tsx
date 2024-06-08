@@ -53,7 +53,7 @@ const OurTeam = () => {
             <div className="flex justify-center mb-5">
               <Image
                 width={200}
-                height={100}
+                height={80}
                 src={team.imageUrl}
                 alt={team.name}
               />
