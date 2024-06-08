@@ -51,10 +51,10 @@ const LoginPage = ({
 
         const redirectUrl = redirect || "/dashboard/profile";
         if (loginRes.data?.needPasswordChange) {
-          router.push("/dashboard/change-password");
+          router.replace("/dashboard/change-password", { scroll: false });
         }
         if (!loginRes.data?.needPasswordChange) {
-          router.push(redirectUrl);
+          router.replace(redirectUrl, { scroll: false });
         }
       } else {
         setError(loginRes?.message);

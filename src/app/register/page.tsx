@@ -73,7 +73,7 @@ const RegisterPage = ({
           await storeUserInfo(loginRes?.data?.accessToken);
           const redirectUrl = redirect || "/dashboard/profile";
 
-          router.push(redirectUrl);
+          router.replace(redirectUrl, { scroll: false });
         }
       } else {
         setError(res?.message);
