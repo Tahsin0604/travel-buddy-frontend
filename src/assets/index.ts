@@ -12,6 +12,9 @@ const assets = {
     person4: require("./person-4.jpg"),
     person5: require("./person-5.jpg"),
     person6: require("./person-6.jpg"),
+    travel1: require("./travelWithUs (1).jpg"),
+    travel2: require("./travelWithUs (2).jpg"),
+    travel3: require("./travelWithUs (3).jpg"),
   },
   svgs: {},
 };
