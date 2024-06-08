@@ -56,6 +56,7 @@ const OurTeam = () => {
                 height={80}
                 src={team.imageUrl}
                 alt={team.name}
+                className="rounded-md"
               />
             </div>
             <p className="text-xl font-semibold text-slate-700 mb-3">
