@@ -13,9 +13,10 @@ import React, { useEffect, useState } from "react";
 
 const AuthComponent = () => {
   const router = useRouter();
-  const { data } = useGetMYProfileQuery({});
-  const dispatch = useAppDispatch();
   const userInfo = getUserInfo();
+  const { data } = useGetMYProfileQuery({}, { skip: !userInfo });
+  const dispatch = useAppDispatch();
+
   const [userImage, setUserImage] = useState("");
   const [userName, setUserName] = useState("");
   useEffect(() => {
