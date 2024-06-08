@@ -66,7 +66,6 @@ const ImageUploadModal = ({
                 <Image
                   src={image}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   fill
                   className="object-cover"

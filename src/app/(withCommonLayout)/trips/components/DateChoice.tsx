@@ -1,5 +1,5 @@
 import { DatePicker, Form } from "antd";
-
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
@@ -12,8 +12,12 @@ type TProps = {
 };
 
 const DateChoice = ({ label, value, setDate }: TProps) => {
+  const [data, setData] = useState("");
   const dateFormat = "YYYY-MM-DD";
   const date = dayjs(new Date()).format(dateFormat);
+  useEffect(() => {
+    setData(value);
+  }, [value]);
 
   const disabledDateFunction = (current: dayjs.Dayjs) => {
     return current.isBefore(dayjs(date, dateFormat), "day");
@@ -25,6 +29,7 @@ const DateChoice = ({ label, value, setDate }: TProps) => {
       <DatePicker
         format={dateFormat}
         defaultValue={value ? dayjs(value) : null}
+        value={dayjs(data)}
         disabledDate={disabledDateFunction}
         size="large"
         style={{ width: "100%" }}

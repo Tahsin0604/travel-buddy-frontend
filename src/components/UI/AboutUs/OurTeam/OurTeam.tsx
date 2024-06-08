@@ -55,7 +55,6 @@ const OurTeam = () => {
                 <Image
                   fill={true}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   src={team.imageUrl}
                   alt={team.name}

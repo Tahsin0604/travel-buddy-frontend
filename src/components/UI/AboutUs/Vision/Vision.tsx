@@ -8,7 +8,6 @@ const Vision = () => {
         src={assets.images.vision}
         alt="vision"
         sizes="100vw"
-        placeholder="blur"
         quality={100}
         fill
         className="object-cover"

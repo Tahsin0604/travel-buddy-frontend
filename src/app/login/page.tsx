@@ -28,9 +28,11 @@ const LoginPage = ({
 }) => {
   const router = useRouter();
   console.log(searchParams);
+  const redirect = searchParams?.redirect as string;
+  console.log(redirect);
   const [error, setError] = useState("");
   const registerRoute = () => {
-    const redirectUrl = searchParams?.redirect || "";
+    const redirectUrl = redirect || "";
     if (redirectUrl === "") {
       router.push(`/register`);
     } else {
@@ -47,12 +49,12 @@ const LoginPage = ({
         toast.success(loginRes?.message);
         await storeUserInfo(loginRes?.data?.accessToken);
         console.log(searchParams);
-        const redirectUrl = searchParams?.redirect || "/dashboard/profile";
+        const redirectUrl = redirect || "/dashboard/profile";
         if (loginRes.data?.needPasswordChange) {
           router.push("/dashboard/change-password");
         }
         if (!loginRes.data?.needPasswordChange) {
-          router.push("/dashboard/profile");
+          router.push(redirectUrl);
         }
       } else {
         setError(loginRes?.message);
@@ -80,7 +82,6 @@ const LoginPage = ({
               src={assets.images.login}
               alt="login"
               sizes="100vw"
-              placeholder="blur"
               quality={100}
               fill
               className="object-cover"

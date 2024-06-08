@@ -48,7 +48,6 @@ const ProfilePage = ({
                   alt="profile"
                   fill={true}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   className="object-cover"
                 />
@@ -58,7 +57,6 @@ const ProfilePage = ({
                   alt="profile"
                   fill={true}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   className="object-cover"
                 />

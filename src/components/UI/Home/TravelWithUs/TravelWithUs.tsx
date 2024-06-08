@@ -38,7 +38,6 @@ const TravelWithUs = () => {
                 src={highlight.imageUrl}
                 alt="about us"
                 sizes="100vw"
-                placeholder="blur"
                 quality={100}
                 fill
                 className="object-cover"

@@ -100,7 +100,6 @@ const RegisterPage = ({
             src={assets.images.register}
             alt="register"
             sizes="100vw"
-            placeholder="blur"
             quality={100}
             fill
             className="object-cover"

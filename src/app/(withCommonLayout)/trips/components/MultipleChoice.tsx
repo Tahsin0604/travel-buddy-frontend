@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import { useEffect, useState } from "react";
 
 type TProps = {
   label: string;
@@ -7,6 +8,10 @@ type TProps = {
   setValue: React.Dispatch<React.SetStateAction<{}>>;
 };
 const MultipleChoice = ({ label, value, setValue, options }: TProps) => {
+  const [data, setData] = useState("");
+  useEffect(() => {
+    setData(value);
+  }, [value]);
   const handleChange = (value: string) => {
     setValue(value);
   };
@@ -16,7 +21,8 @@ const MultipleChoice = ({ label, value, setValue, options }: TProps) => {
       <Select
         style={{ width: "100%" }}
         options={options}
-        defaultValue={value ? value : "Select One"}
+        defaultValue="Select One"
+        value={data}
         size="large"
         placeholder="Select One"
         onChange={handleChange}

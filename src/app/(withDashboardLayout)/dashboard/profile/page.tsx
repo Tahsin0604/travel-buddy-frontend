@@ -74,7 +74,6 @@ const ProfilePage = () => {
                   alt="profile"
                   fill={true}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   className="object-cover"
                 />
@@ -84,7 +83,6 @@ const ProfilePage = () => {
                   alt="profile"
                   fill={true}
                   sizes="100vw"
-                  placeholder="blur"
                   quality={100}
                   className="object-cover"
                 />
@@ -144,8 +142,8 @@ const ProfilePage = () => {
       </Row>
       {role === "USER" && (
         <div className="grid grid-cols-12 gap-6 my-8">
-          <div className="col-span-12 lg:col-span-6 space-y-7 p-4 bg-slate-50 rounded-md">
-            <div>
+          <div className="col-span-12 lg:col-span-6">
+            <div className="bg-slate-50 p-4 space-y-7 rounded-md">
               <p className="text-slate-700 font-semibold text-lg text-center">
                 Trip Request History
               </p>
@@ -163,8 +161,8 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-6 space-y-7 p-4 bg-slate-50 rounded-md">
-            <div>
+          <div className="col-span-12 lg:col-span-6 space-y-7">
+            <div className="bg-slate-50 p-4 space-y-7 rounded-md">
               <p className="text-slate-700 font-semibold text-lg text-center">
                 Trip Post
               </p>

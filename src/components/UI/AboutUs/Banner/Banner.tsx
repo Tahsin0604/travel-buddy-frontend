@@ -8,7 +8,6 @@ const Banner = () => {
         src={assets.images.aboutUs}
         alt="about us"
         sizes="100vw"
-        placeholder="blur"
         quality={100}
         fill
         className="object-cover"
