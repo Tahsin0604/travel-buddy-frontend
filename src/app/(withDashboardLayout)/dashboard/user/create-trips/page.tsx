@@ -28,9 +28,7 @@ const createTripValidation = z.object({
   ]),
   tripTitle: z.string({ required_error: "destination is required" }),
   description: z.string().optional(),
-  startDate: z.string().refine((val) => val === "", {
-    message: "destination is required",
-  }),
+  startDate: z.string(),
   budget: z.number(),
 });
 
