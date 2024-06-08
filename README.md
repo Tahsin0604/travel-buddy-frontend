@@ -46,4 +46,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ---
 
-live-sites link:[link](https://tripbuddy-eta.vercel.app/trips)
+live-sites link:[link](https://tripbuddy-eta.vercel.app)
