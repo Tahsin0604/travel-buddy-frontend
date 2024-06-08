@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -23,7 +23,17 @@ const loginUser = z.object({
 
 const LoginPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [error, setError] = useState("");
+
+  const registerRoute = () => {
+    const redirectUrl = searchParams.get("redirect") || "";
+    if (redirectUrl === "") {
+      router.push(`/register`);
+    } else {
+      router.push(`/register?redirect=${redirectUrl}`);
+    }
+  };
 
   const handleSubmit = async (data: FieldValues) => {
     try {
@@ -33,12 +43,13 @@ const LoginPage = () => {
         setError("");
         toast.success(loginRes?.message);
         await storeUserInfo(loginRes?.data?.accessToken);
-
+        const redirectUrl =
+          searchParams.get("redirect") || "/dashboard/profile";
         if (loginRes.data?.needPasswordChange) {
           router.push("/dashboard/change-password");
         }
         if (!loginRes.data?.needPasswordChange) {
-          router.push("/dashboard/profile");
+          router.push(redirectUrl);
         }
       } else {
         setError(loginRes?.message);
@@ -47,6 +58,7 @@ const LoginPage = () => {
       console.error(err.message);
     }
   };
+
   return (
     <div className="bg-slate-50 py-10 min-h-screen flex flex-col justify-center item-center">
       <div>
@@ -94,9 +106,13 @@ const LoginPage = () => {
               <p className="mt-2">
                 <small>
                   Don&apos;t have an account?{" "}
-                  <Link href="/register" className="text-sky-500">
+                  <Button
+                    type="link"
+                    className="text-sky-500"
+                    onClick={() => registerRoute()}
+                  >
                     Create an account
-                  </Link>
+                  </Button>
                 </small>
               </p>
             </ReusableForm>

@@ -16,7 +16,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { storeUserInfo } from "@/services/auth.services";
 import { userLogin } from "@/services/actions/userLogin";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const createUser = z
   .object({
@@ -40,7 +40,16 @@ const createUser = z
 const RegisterPage = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const searchParams = useSearchParams();
 
+  const loginRoute = () => {
+    const redirectUrl = searchParams.get("redirect") || "";
+    if (redirectUrl === "") {
+      router.push(`/login`);
+    } else {
+      router.push(`/login?redirect=${redirectUrl}`);
+    }
+  };
   const handleSubmit = async (data: FieldValues) => {
     const { confirmPassword, ...payload } = data;
 
@@ -58,13 +67,10 @@ const RegisterPage = () => {
           setError("");
           toast.success(loginRes?.message);
           await storeUserInfo(loginRes?.data?.accessToken);
+          const redirectUrl =
+            searchParams.get("redirect") || "/dashboard/profile";
 
-          if (loginRes.data?.needPasswordChange) {
-            router.push("/dashboard/change-password");
-          }
-          if (!loginRes.data?.needPasswordChange) {
-            router.push("/dashboard/profile");
-          }
+          router.push(redirectUrl);
         }
       } else {
         setError(res?.message);
@@ -122,6 +128,13 @@ const RegisterPage = () => {
             <p className="mt-2">
               <small>
                 All ready have an account?{" "}
+                <Button
+                  type="link"
+                  className="text-sky-500"
+                  onClick={() => loginRoute()}
+                >
+                  Create an account
+                </Button>
                 <Link href="/login" className="text-sky-500 ">
                   Login now
                 </Link>

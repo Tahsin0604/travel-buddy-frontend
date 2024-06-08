@@ -28,7 +28,7 @@ const AllTrips = () => {
         {trips?.map((trip: Record<string, any>) => (
           <div
             key={trip?.id}
-            className="col-span-12 md:col-span-6 lg:col-span-3"
+            className="col-span-12 md:col-span-6 lg:col-span-4 "
           >
             <TripCard trip={trip} />
           </div>
@@ -39,13 +39,14 @@ const AllTrips = () => {
 
   return (
     <div className="custom-container mb-16">
-      <p className="text-center text-5xl text-slate-800 font-extrabold">
+      <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-20  text-center">
         Featured Trips
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">{renderComponent}</div>
       <div className="flex justify-center mt-10">
         <Button
           icon={<ArrowRightOutlined />}
+          iconPosition="end"
           size="large"
           href="/trips"
           style={{

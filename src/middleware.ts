@@ -20,11 +20,17 @@ export function middleware(req: NextRequest) {
 
   const accessToken = cookies().get(authKey)?.value;
 
+  const redirectToLogin = (url: string) => {
+    const loginUrl = new URL(`/login`, req.url);
+    loginUrl.searchParams.set("redirect", url);
+    return NextResponse.redirect(loginUrl);
+  };
+
   if (!accessToken) {
     if (authRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL("/login", req.url));
+      return redirectToLogin(pathname);
     }
   }
 

@@ -62,7 +62,7 @@ const TripCard = ({
               )}
             </div>
           </div>
-          <Link href={`/trips/${trip?.id}`} className="py-2 px-4 block">
+          <Link href={`/trips/${trip?.id}`} className="py-2 px-4 flex flex-col">
             <p className="text-slate-500">
               with{"  "}
               <Link
