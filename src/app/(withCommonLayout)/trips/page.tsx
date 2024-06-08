@@ -43,8 +43,10 @@ const TripsPage = ({
   useEffect(() => {
     const query = { ...searchQuery };
     if (debouncedTerms) {
-      console.log(debouncedTerms);
       query["searchTerm"] = debouncedTerms;
+    }
+    if (!debouncedTerms && destination === "") {
+      query["searchTerm"] = destination;
     }
     if (startDate) {
       query["startDate"] = startDate;
@@ -61,11 +63,12 @@ const TripsPage = ({
     if (tripType === "") {
       delete query["tripType"];
     }
+
     if (page) {
       query["page"] = page;
     }
     setSearchQuery(query);
-  }, [startDate, endDate, tripType, page, debouncedTerms]);
+  }, [startDate, endDate, tripType, page, debouncedTerms, destination]);
 
   const { data, isLoading } = useGetAllTripsQuery({ ...searchQuery });
   const trips = data?.trips as Record<string, any>[];
