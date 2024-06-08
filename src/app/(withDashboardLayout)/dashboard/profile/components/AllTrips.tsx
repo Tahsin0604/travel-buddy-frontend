@@ -1,6 +1,7 @@
 "use client";
 import CustomSlider from "@/components/UI/CustomSlider/CustomSlider";
 import { useGetAllMyTripsQuery } from "@/redux/api/tripsApi";
+import { getUserInfo } from "@/services/auth.services";
 import { CalendarFilled, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Empty, List } from "antd";
 import dayjs from "dayjs";
@@ -22,9 +23,10 @@ interface TTrip {
   avatar?: string;
 }
 const AllTrips = () => {
+  const userData = getUserInfo();
   const { data, isLoading } = useGetAllMyTripsQuery({
-    page: 1,
-    limit: 6,
+    userId: userData?.id,
+    args: { page: 1, limit: 4 },
   });
 
   const trips = data?.trips as Record<string, any>[];

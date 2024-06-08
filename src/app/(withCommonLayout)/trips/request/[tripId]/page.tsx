@@ -6,10 +6,11 @@ import Loading from "@/components/UI/Loading";
 import { useGetMYProfileQuery } from "@/redux/api/profile";
 import { useSendBuddyRequestMutation } from "@/redux/api/travelBuddyApi";
 import { useGetTripDetailsQuery } from "@/redux/api/tripsApi";
+import { getUserInfo } from "@/services/auth.services";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -18,13 +19,21 @@ const TripRequestPage = ({
 }: {
   params: { tripId: string };
 }) => {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const user = getUserInfo();
   const { data: userData, isLoading: userLoading } = useGetMYProfileQuery({});
   const { data: trip, isLoading: tripDetailsLoading } =
     useGetTripDetailsQuery(tripId);
   const [sendBuddyRequest, { isLoading }] = useSendBuddyRequestMutation();
-  const router = useRouter();
-  const [error, setError] = useState("");
-
+  useEffect(() => {
+    if (userData) {
+      if (userData.id === user.id) {
+        router.push(`/trips/${tripId}`);
+        router.refresh();
+      }
+    }
+  }, [userData]);
   if (tripDetailsLoading || userLoading) {
     return (
       <div className="flex justify-center mt-36">
@@ -90,7 +99,12 @@ const TripRequestPage = ({
             <InputField name="useEmail" label="User Email" disabled={true} />
             <InputField name="contactNumber" label="Contact Number" />
 
-            <Button size="large" className="w-full" htmlType="submit">
+            <Button
+              size="large"
+              className="w-full"
+              htmlType="submit"
+              disabled={isLoading}
+            >
               Request To Join
             </Button>
           </ReusableForm>

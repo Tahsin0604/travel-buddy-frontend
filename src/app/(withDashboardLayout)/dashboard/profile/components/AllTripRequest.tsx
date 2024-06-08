@@ -26,7 +26,7 @@ interface TTrip {
 const AllTripRequest = () => {
   const { data, isFetching } = useGetAllTripRequestQuery({
     page: 1,
-    limit: 6,
+    limit: 4,
   });
 
   const trips = data?.trips as Record<string, any>[];
