@@ -50,6 +50,8 @@ const TripDetailsPage = ({
 
   useEffect(() => {
     if (trip?.userId === userData?.id) {
+      console.log(trip?.userId === userData?.id);
+      console.log(trip?.userId, userData?.id);
       setIsCreator(true);
     }
   }, [trip]);
