@@ -16,6 +16,9 @@ const ImageUploadModal = ({
   const [resource, setResource] = useState<any>([]);
   const [uploads, setUploads] = useState<string[]>(images);
   useEffect(() => {
+    setUploads(images);
+  }, [images]);
+  useEffect(() => {
     if (resource?.secure_url && !uploads.includes(resource.secure_url)) {
       setUploads((prevUploads) => [...prevUploads, resource.secure_url]);
     }

@@ -57,7 +57,7 @@ const ItineraryItem = ({
         startDay: startDay,
         endDay: startDay + nights,
         nights,
-        activities: debouncedActivities,
+        activities: debouncedActivities ? debouncedActivities : activities,
       };
 
       const tempItinerary = newItinerary.map((item, i) => {
