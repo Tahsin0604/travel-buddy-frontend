@@ -94,7 +94,7 @@ const CreateTripsPage = () => {
         .format("YYYY-MM-DD");
 
       values.itinerary = itinerary;
-      console.log(values);
+
       try {
         const res: Record<string, any> = await createTrip(values);
 

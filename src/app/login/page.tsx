@@ -48,7 +48,7 @@ const LoginPage = ({
         setError("");
         toast.success(loginRes?.message);
         await storeUserInfo(loginRes?.data?.accessToken);
-        console.log(searchParams);
+
         const redirectUrl = redirect || "/dashboard/profile";
         if (loginRes.data?.needPasswordChange) {
           router.push("/dashboard/change-password");

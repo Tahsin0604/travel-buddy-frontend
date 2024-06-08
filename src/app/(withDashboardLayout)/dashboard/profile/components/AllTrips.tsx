@@ -30,7 +30,7 @@ const AllTrips = () => {
   });
 
   const trips = data?.trips as Record<string, any>[];
-  console.log(trips);
+
   const dataList: TTrip[] =
     trips?.map((trip, i) => ({
       tripHref: `/trips/${trip?.id}`,

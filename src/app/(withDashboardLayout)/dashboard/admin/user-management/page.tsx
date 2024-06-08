@@ -22,7 +22,7 @@ const UserManagementPage = () => {
   });
   const users = data?.users as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;
-  console.log(meta);
+
   const dataList: IDataType[] =
     users?.map((user, i) => ({
       userHref: `/profile/${user?.userId}`,
