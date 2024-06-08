@@ -51,13 +51,15 @@ const OurTeam = () => {
         {teams.map((team, i) => (
           <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
             <div className="flex justify-center mb-5">
-              <Image
-                width={200}
-                height={80}
-                src={team.imageUrl}
-                alt={team.name}
-                className="rounded-md"
-              />
+              <div className="h-20 w-52 relative">
+                <Image
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  src={team.imageUrl}
+                  alt={team.name}
+                  className="rounded-md"
+                />
+              </div>
             </div>
             <p className="text-xl font-semibold text-slate-700 mb-3">
               {team.name}
