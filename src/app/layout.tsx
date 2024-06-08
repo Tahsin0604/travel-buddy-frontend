@@ -20,7 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="tourism" href="../app/tourism.png" />
+        <link
+          rel="tourism"
+          href="/icon/tourism.png"
+          type="image/png"
+          sizes="32x32"
+        />
       </head>
       <body>
         <Providers>
