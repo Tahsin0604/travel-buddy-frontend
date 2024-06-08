@@ -8,8 +8,11 @@ const JoinUs = () => {
       <Image
         src={assets.images.joinUs}
         alt="join us"
-        fill={true}
-        className=" w-full h-full object-cover"
+        sizes="100vw"
+        placeholder="blur"
+        quality={100}
+        fill
+        className="object-cover"
       />
       <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-70 text-center px-10">
         <div className="text-center">

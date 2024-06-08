@@ -1,7 +1,6 @@
 "use client";
 
 import assets from "@/assets";
-import DatePickerField from "@/components/Forms/DatePickerField";
 import InputField from "@/components/Forms/InputField";
 import PasswordField from "@/components/Forms/PasswordField";
 import ReusableForm from "@/components/Forms/ReusableForm";
@@ -61,12 +60,15 @@ const LoginPage = () => {
         </div>
 
         <div className="grid grid-cols-12 justify-center items-center gap-8 lg:gap-16 px-8 md:px-16 lg:px-28">
-          <div className="col-span-6 h-[51vh] overflow-hidden drop-shadow-md rounded-lg hidden md:block">
+          <div className="col-span-6  h-full overflow-hidden drop-shadow-md rounded-lg hidden md:block relative">
             <Image
               src={assets.images.login}
               alt="login"
-              className="h-full w-full object-cover"
+              sizes="100vw"
+              placeholder="blur"
               quality={100}
+              fill
+              className="object-cover"
             />
           </div>
           <div className="col-span-12 md:col-span-6 px-10 py-6 rounded-lg bg-white drop-shadow-md">

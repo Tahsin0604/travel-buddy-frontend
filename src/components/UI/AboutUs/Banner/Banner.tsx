@@ -7,8 +7,11 @@ const Banner = () => {
       <Image
         src={assets.images.aboutUs}
         alt="about us"
-        fill={true}
-        className=" w-full h-full object-cover"
+        sizes="100vw"
+        placeholder="blur"
+        quality={100}
+        fill
+        className="object-cover"
       />
       <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-30 text-center">
         <h1 className="text-4xl md:text-8xl font-extrabold text-white">

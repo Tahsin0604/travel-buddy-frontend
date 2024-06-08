@@ -67,11 +67,27 @@ const ProfilePage = () => {
       <Row gutter={[12, 12]}>
         <Col xs={24} md={8}>
           <div className="flex flex-col justify-center items-center gap-5">
-            <div className="w-64 h-72 relative rounded-md drop-shadow-md overflow-hidden">
+            <div className="w-52 h-52 relative rounded-md drop-shadow-md overflow-hidden">
               {imageSrc ? (
-                <Image src={imageSrc} alt="profile" fill={true} />
+                <Image
+                  src={imageSrc}
+                  alt="profile"
+                  fill={true}
+                  sizes="100vw"
+                  placeholder="blur"
+                  quality={100}
+                  className="object-cover"
+                />
               ) : (
-                <Image src={assets.images.upload} alt="profile" fill={true} />
+                <Image
+                  src={assets.images.upload}
+                  alt="profile"
+                  fill={true}
+                  sizes="100vw"
+                  placeholder="blur"
+                  quality={100}
+                  className="object-cover"
+                />
               )}
             </div>
             <CloudinaryUpload setResource={setResource} />

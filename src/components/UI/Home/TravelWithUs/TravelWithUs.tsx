@@ -29,20 +29,26 @@ const TravelWithUs = () => {
       </p>
       <div className="grid grid-cols-12 gap-8">
         {highlights.map((highlight, i) => (
-          <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
-            <div className="relative h-[450px] w-full">
+          <div
+            key={i}
+            className="col-span-12 md:col-span-6 lg:col-span-4 rounded-md overflow-hidden"
+          >
+            <div className="relative h-[550px] w-full">
               <Image
                 src={highlight.imageUrl}
                 alt="about us"
-                fill={true}
-                className=" w-full h-full object-cover"
+                sizes="100vw"
+                placeholder="blur"
+                quality={100}
+                fill
+                className="object-cover"
               />
               <div className="absolute inset-0 flex flex-col justify-end  bg-black bg-opacity-50 px-4 pb-5">
                 <div>
-                  <p className="text-white text-lg font-bold mb-3">
+                  <p className="text-white text-xl font-bold mb-3">
                     {highlight.title}
                   </p>
-                  <p className="text-slate-100 font-semibold">
+                  <p className="text-slate-300 text-lg font-semibold">
                     {highlight.subTitle}
                   </p>
                 </div>

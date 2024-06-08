@@ -23,9 +23,12 @@ export default function CustomSlider({ images }: { images: string[] }) {
           <SwiperSlide key={index} className="w-full h-full relative">
             <Image
               src={image}
-              fill={true}
+              sizes="100vw"
+              placeholder="blur"
+              quality={100}
+              fill
+              className="object-cover"
               alt={`image ${index + 1}`}
-              className="h-full w-full"
             />
           </SwiperSlide>
         ))}

@@ -65,9 +65,12 @@ const ImageUploadModal = ({
               >
                 <Image
                   src={image}
-                  fill={true}
-                  alt={`image ${index + 1}`}
+                  sizes="100vw"
+                  placeholder="blur"
+                  quality={100}
+                  fill
                   className="object-cover"
+                  alt={`image ${index + 1}`}
                 />
                 <div className="absolute text-white font-bold bottom-0 right-0 z-10">
                   <DeleteOutlined

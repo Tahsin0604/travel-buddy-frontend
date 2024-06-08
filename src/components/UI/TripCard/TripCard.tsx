@@ -33,7 +33,7 @@ const TripCard = ({
   };
 
   return (
-    <div className="rounded-md shadow">
+    <div className="rounded-md shadow h-full">
       <Badge.Ribbon
         text={`$ ${trip?.budget}`}
         color="cyan"

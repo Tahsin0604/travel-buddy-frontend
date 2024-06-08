@@ -47,17 +47,19 @@ const OurTeam = () => {
       <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-10">
         Our Teams
       </p>
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-8">
         {teams.map((team, i) => (
           <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
             <div className="flex justify-center mb-5">
               <div className="h-56 w-52 relative">
                 <Image
                   fill={true}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="100vw"
+                  placeholder="blur"
+                  quality={100}
                   src={team.imageUrl}
                   alt={team.name}
-                  className="rounded-md"
+                  className="rounded-md object-cover"
                 />
               </div>
             </div>
