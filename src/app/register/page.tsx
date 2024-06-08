@@ -135,11 +135,8 @@ const RegisterPage = ({
                   className="text-sky-500"
                   onClick={() => loginRoute()}
                 >
-                  Create an account
-                </Button>
-                <Link href="/login" className="text-sky-500 ">
                   Login now
-                </Link>
+                </Button>
               </small>
             </p>
           </ReusableForm>
