@@ -51,8 +51,14 @@ const TripsPage = ({
     if (endDate) {
       query["endDate"] = endDate;
     }
+    if (endDate === "") {
+      delete query["endDate"];
+    }
     if (tripType) {
       query["tripType"] = tripType;
+    }
+    if (tripType === "") {
+      delete query["tripType"];
     }
     if (page) {
       query["page"] = page;
@@ -63,6 +69,13 @@ const TripsPage = ({
   const { data, isLoading } = useGetAllTripsQuery({ ...searchQuery });
   const trips = data?.trips as Record<string, any>[];
   const meta = data?.meta as Record<string, any>;
+  const handleReset = () => {
+    setPage(1);
+    setStartDate(date);
+    setDestination("");
+    setEndDate("");
+    setTripType("");
+  };
   let renderComponent: ReactNode;
   if (isLoading) {
     renderComponent = (
@@ -134,6 +147,13 @@ const TripsPage = ({
             value={endDate as string}
             setDate={setEndDate}
           />
+          <Button
+            danger
+            onClick={() => handleReset()}
+            style={{ width: "100%" }}
+          >
+            Reset Filter
+          </Button>
         </div>
         <div className="w-full lg:w-4/5 space-y-5">
           <div className=" flex justify-between items-centers">

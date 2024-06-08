@@ -105,7 +105,7 @@ const ProfilePage = () => {
               }}
               size="large"
               type="primary"
-              className="mt-8"
+              className="mt-3"
             >
               Update Profile
             </Button>

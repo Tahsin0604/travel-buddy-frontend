@@ -24,11 +24,10 @@ const loginUser = z.object({
 const LoginPage = ({
   searchParams,
 }: {
-  searchParams: {
-    redirect: string;
-  };
+  searchParams: Record<string, unknown>;
 }) => {
   const router = useRouter();
+  console.log(searchParams);
   const [error, setError] = useState("");
   const registerRoute = () => {
     const redirectUrl = searchParams?.redirect || "";
@@ -53,7 +52,7 @@ const LoginPage = ({
           router.push("/dashboard/change-password");
         }
         if (!loginRes.data?.needPasswordChange) {
-          router.push(redirectUrl);
+          router.push("/dashboard/profile");
         }
       } else {
         setError(loginRes?.message);

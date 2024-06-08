@@ -45,6 +45,7 @@ const TripsDrawer = ({
     setTripType("");
     setOpen(false);
   };
+
   return (
     <>
       <DrawerContainer title="Filter Trips" open={open} setOpen={setOpen}>

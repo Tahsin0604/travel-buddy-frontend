@@ -13,13 +13,7 @@ const DrawerItems = ({ open, setOpen }: TProps) => {
   };
 
   return (
-    <Drawer
-      placement="left"
-      closable={false}
-      onClose={onClose}
-      open={open}
-      key="left"
-    >
+    <Drawer placement="left" onClose={onClose} open={open} key="left">
       <div className="text-center flex justify-center mb-8">
         <Link href="/">
           <p className="text-slate-700 font-bold text-3xl drop-shadow-md tracking-wide">

@@ -38,8 +38,8 @@ const AllTrips = () => {
   }
 
   return (
-    <div className="custom-container mb-16">
-      <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-20  text-center">
+    <div className="custom-container mt-10 mb-20">
+      <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-24 text-center">
         Featured Trips
       </p>
       <div className="mt-16 grid grid-cols-12 gap-5">{renderComponent}</div>
