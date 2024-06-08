@@ -19,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="tourism" href="../app/tourism.png" />
+      </head>
       <body>
         <Providers>
           <AntdRegistry>
