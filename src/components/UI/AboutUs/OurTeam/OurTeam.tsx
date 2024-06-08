@@ -49,8 +49,8 @@ const OurTeam = () => {
       </p>
       <div className="grid grid-cols-12 gap-6">
         {teams.map((team, i) => (
-          <div key={i} className="col-span-12 md:col-span-6lg:col-span-4">
-            <div className="flex justify-between mb-5">
+          <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
+            <div className="flex justify-center mb-5">
               <Image
                 width={200}
                 height={100}
