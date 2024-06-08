@@ -42,8 +42,8 @@ const TripsPage = ({
 
   useEffect(() => {
     const query = { ...searchQuery };
-    if (!!debouncedTerms) {
-      query["searchTerm"] = destination;
+    if (debouncedTerms) {
+      query["searchTerm"] = debouncedTerms;
     }
     if (startDate) {
       query["startDate"] = startDate;
