@@ -29,7 +29,7 @@ const DateChoice = ({ label, value, setDate }: TProps) => {
       <DatePicker
         format={dateFormat}
         defaultValue={value ? dayjs(value) : null}
-        value={dayjs(data)}
+        value={data ? dayjs(data) : null}
         disabledDate={disabledDateFunction}
         size="large"
         style={{ width: "100%" }}
