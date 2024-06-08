@@ -36,8 +36,10 @@ const TripDetailsPage = ({
 
   useEffect(() => {
     let status = true;
-    if (trip?.userId === userData?.id) {
-      status = false;
+    if (trip) {
+      if (trip?.userId === userData?.id) {
+        status = false;
+      }
     }
     if (tripStatus?.status) {
       status = false;
@@ -49,10 +51,10 @@ const TripDetailsPage = ({
   }, [trip, tripStatus]);
 
   useEffect(() => {
-    if (trip?.userId === userData?.id) {
-      console.log(trip?.userId === userData?.id);
-      console.log(trip?.userId, userData?.id);
-      setIsCreator(true);
+    if (trip) {
+      if (trip?.userId === userData?.id) {
+        setIsCreator(true);
+      }
     }
   }, [trip]);
 
