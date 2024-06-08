@@ -40,15 +40,14 @@ const createUser = z
 const RegisterPage = ({
   searchParams,
 }: {
-  searchParams: {
-    redirect: string;
-  };
+  searchParams: Record<string, unknown>;
 }) => {
   const router = useRouter();
+  const redirect = searchParams?.redirect as string;
   const [error, setError] = useState("");
 
   const loginRoute = () => {
-    const redirectUrl = searchParams?.redirect || "";
+    const redirectUrl = redirect || "";
     if (redirectUrl === "") {
       router.push(`/login`);
     } else {
@@ -72,7 +71,7 @@ const RegisterPage = ({
           setError("");
           toast.success(loginRes?.message);
           await storeUserInfo(loginRes?.data?.accessToken);
-          const redirectUrl = searchParams?.redirect || "/dashboard/profile";
+          const redirectUrl = redirect || "/dashboard/profile";
 
           router.push(redirectUrl);
         }

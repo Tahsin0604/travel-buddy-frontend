@@ -14,6 +14,8 @@ import dayjs from "dayjs";
 import { getUserInfo } from "@/services/auth.services";
 import AllTripRequest from "./components/AllTripRequest";
 import AllTrips from "./components/AllTrips";
+import RecentTrips from "./components/RecentTrips";
+import RecentUsers from "./components/RecentUsers";
 
 const ProfilePage = () => {
   const [resource, setResource] = useState<any>("");
@@ -113,19 +115,19 @@ const ProfilePage = () => {
           <div className="space-y-5">
             <p className="text-slate-700 font-semibold text-lg">
               Name :{" "}
-              <span className="text-slate-800 font-semibold text-lg">
+              <span className="text-slate-500 font-semibold text-lg">
                 {profile?.name}
               </span>
             </p>
             <p className="text-slate-700 font-semibold text-lg">
               Email :{" "}
-              <span className="text-slate-800 font-semibold text-lg">
+              <span className="text-slate-500 font-semibold text-lg">
                 {profile?.email}
               </span>
             </p>
             <p className="text-slate-700 font-semibold text-lg">
               Date of Birth :{" "}
-              <span className="text-slate-800 font-semibold text-lg">
+              <span className="text-slate-500 font-semibold text-lg">
                 {dayjs(profile?.dateOfBirth, "YYYY-MM-DD")
                   .format("DD MMM YY")
                   .toUpperCase()}
@@ -133,7 +135,7 @@ const ProfilePage = () => {
             </p>
             <p className="text-slate-700 font-semibold text-lg">
               Bio :{" "}
-              <span className="text-slate-800 font-semibold text-lg">
+              <span className="text-slate-500 font-semibold text-lg">
                 {profile?.bio ?? ""}
               </span>
             </p>
@@ -189,13 +191,13 @@ const ProfilePage = () => {
               All Users
             </p>
             <div className="rounded-md bg-white py-1">
-              <AllTripRequest />
+              <RecentUsers />
             </div>
             <div className="flex justify-end">
               <Button
                 type="link"
                 size="large"
-                href="/dashboard/user/my-trip-request"
+                href="/dashboard/admin/user-management"
               >
                 Show More
               </Button>
@@ -203,16 +205,16 @@ const ProfilePage = () => {
           </div>
           <div className="col-span-12 lg:col-span-6 space-y-7 p-4 bg-slate-50 rounded-md">
             <p className="text-slate-700 font-semibold text-lg text-center">
-              All trips
+              Recent trips
             </p>
             <div className="rounded-md bg-white py-1">
-              <AllTrips />
+              <RecentTrips />
             </div>
             <div className="flex justify-end">
               <Button
                 type="link"
                 size="large"
-                href="/dashboard/user/my-trip-request"
+                href="/dashboard/admin/trips-management"
               >
                 Show More
               </Button>

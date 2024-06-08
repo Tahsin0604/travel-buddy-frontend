@@ -27,9 +27,9 @@ const LoginPage = ({
   searchParams: Record<string, unknown>;
 }) => {
   const router = useRouter();
-  console.log(searchParams);
+
   const redirect = searchParams?.redirect as string;
-  console.log(redirect);
+
   const [error, setError] = useState("");
   const registerRoute = () => {
     const redirectUrl = redirect || "";
