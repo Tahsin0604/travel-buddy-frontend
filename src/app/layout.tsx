@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link
-          rel="tourism"
+          rel="icon"
           href="/icon/tourism.png"
           type="image/png"
           sizes="32x32"
