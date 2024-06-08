@@ -16,7 +16,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { storeUserInfo } from "@/services/auth.services";
 import { userLogin } from "@/services/actions/userLogin";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const createUser = z
   .object({
@@ -37,13 +37,18 @@ const createUser = z
     path: ["confirmPassword"],
   });
 
-const RegisterPage = () => {
+const RegisterPage = ({
+  searchParams,
+}: {
+  searchParams: {
+    redirect: string;
+  };
+}) => {
   const router = useRouter();
   const [error, setError] = useState("");
-  const searchParams = useSearchParams();
 
   const loginRoute = () => {
-    const redirectUrl = searchParams.get("redirect") || "";
+    const redirectUrl = searchParams?.redirect || "";
     if (redirectUrl === "") {
       router.push(`/login`);
     } else {
@@ -67,8 +72,7 @@ const RegisterPage = () => {
           setError("");
           toast.success(loginRes?.message);
           await storeUserInfo(loginRes?.data?.accessToken);
-          const redirectUrl =
-            searchParams.get("redirect") || "/dashboard/profile";
+          const redirectUrl = searchParams?.redirect || "/dashboard/profile";
 
           router.push(redirectUrl);
         }

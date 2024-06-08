@@ -21,13 +21,17 @@ const loginUser = z.object({
   password: z.string().min(6, { message: "Must be 6 or more characters long" }),
 });
 
-const LoginPage = () => {
+const LoginPage = ({
+  searchParams,
+}: {
+  searchParams: {
+    redirect: string;
+  };
+}) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [error, setError] = useState("");
-
   const registerRoute = () => {
-    const redirectUrl = searchParams.get("redirect") || "";
+    const redirectUrl = searchParams?.redirect || "";
     if (redirectUrl === "") {
       router.push(`/register`);
     } else {
@@ -43,8 +47,7 @@ const LoginPage = () => {
         setError("");
         toast.success(loginRes?.message);
         await storeUserInfo(loginRes?.data?.accessToken);
-        const redirectUrl =
-          searchParams.get("redirect") || "/dashboard/profile";
+        const redirectUrl = searchParams?.redirect || "/dashboard/profile";
         if (loginRes.data?.needPasswordChange) {
           router.push("/dashboard/change-password");
         }
