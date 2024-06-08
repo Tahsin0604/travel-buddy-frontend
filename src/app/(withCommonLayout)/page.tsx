@@ -1,3 +1,4 @@
+import JoinUs from "@/components/UI/AboutUs/JoinUs/JoinUs";
 import AllTrips from "@/components/UI/Home/AllTrips/AllTrips";
 import Hero from "@/components/UI/Home/Hero/Hero";
 import SearchBox from "@/components/UI/Home/SearchBox/SearchBox";
@@ -10,6 +11,7 @@ const HomePage = () => {
       <SearchBox />
       <AllTrips />
       <TravelWithUs />
+      <JoinUs />
     </div>
   );
 };

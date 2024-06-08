@@ -77,7 +77,7 @@ const TripCard = ({
                 ? trip?.tripTitle.slice(0, 40).concat("...")
                 : trip?.tripTitle}
             </p>
-            <p className="text-slate-600 pb-2 font-semibold">
+            <p className="text-slate-600 pb-2 font-semibold mt-auto">
               {dayjs(trip?.startDate, "YYYY-MM-DD")
                 .format("DD MMM YY")
                 .toUpperCase()}{" "}

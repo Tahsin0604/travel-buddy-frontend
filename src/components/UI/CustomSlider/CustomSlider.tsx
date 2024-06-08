@@ -17,7 +17,7 @@ export default function CustomSlider({ images }: { images: string[] }) {
         }}
         modules={[Pagination]}
         className="w-full h-full relative group"
-        loop={true}
+        loop={images.length > 1 ? true : false}
       >
         {images?.map((image, index) => (
           <SwiperSlide key={index} className="w-full h-full relative">

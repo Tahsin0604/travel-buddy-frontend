@@ -23,8 +23,8 @@ const TravelWithUs = () => {
     },
   ];
   return (
-    <div className="custom-container my-20">
-      <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-10  text-center">
+    <div className="custom-container my-28">
+      <p className="text-2xl md:text-5xl font-extrabold text-slate-700 mb-20  text-center">
         Discover Your Adventure
       </p>
       <div className="grid grid-cols-12 gap-8">
